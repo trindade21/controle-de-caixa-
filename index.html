@@ -17,25 +17,26 @@ background:#f3f4f6;
 color:#111827;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 padding-bottom:90px;
--webkit-tap-highlight-color:transparent
 }
 
 header{
 background:#111827;
 color:white;
-padding:25px 16px 15px;
+padding:25px 16px 14px;
 position:sticky;
 top:0;
-z-index:5
+z-index:5;
 }
 
-header h1{margin:0;font-size:21px}
-header small{opacity:.8}
+header h1{
+margin:0;
+font-size:21px;
+}
 
 main{
-max-width:720px;
+max-width:700px;
 margin:auto;
-padding:14px
+padding:14px;
 }
 
 .card{
@@ -43,10 +44,8 @@ background:white;
 border-radius:16px;
 padding:16px;
 margin-bottom:12px;
-box-shadow:0 2px 8px #0001
+box-shadow:0 2px 8px #0001;
 }
-
-h2,h3{margin-top:0}
 
 input,select,button{
 width:100%;
@@ -56,7 +55,6 @@ border:1px solid #d1d5db;
 font-size:16px;
 background:white;
 margin:5px 0;
-font-family:inherit
 }
 
 button{
@@ -64,34 +62,60 @@ background:#111827;
 color:white;
 border:0;
 font-weight:bold;
-cursor:pointer
 }
 
-button:active{opacity:.75}
+button:active{
+transform:scale(.98);
+}
 
-.danger{background:#dc2626}
-.green{background:#16a34a}
-.blue{background:#2563eb}
-.gray{background:#e5e7eb;color:#111827}
+.danger{
+background:#dc2626;
+}
+
+.green{
+background:#16a34a;
+}
+
+.blue{
+background:#2563eb;
+}
+
+.gray{
+background:#e5e7eb;
+color:#111827;
+}
+
+.orange{
+background:#ea580c;
+}
 
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px
+gap:10px;
 }
 
 .valor{
 font-size:24px;
-font-weight:bold
+font-weight:bold;
 }
 
-.big{
+.grande{
 font-size:30px;
-font-weight:bold
+font-weight:bold;
 }
 
-.muted{color:#6b7280}
-.center{text-align:center}
+.muted{
+color:#6b7280;
+}
+
+.center{
+text-align:center;
+}
+
+.hidden{
+display:none;
+}
 
 .item{
 display:flex;
@@ -99,46 +123,45 @@ justify-content:space-between;
 align-items:center;
 gap:10px;
 padding:12px 0;
-border-bottom:1px solid #eee
+border-bottom:1px solid #eee;
 }
 
-.item:last-child{border-bottom:0}
+.item:last-child{
+border-bottom:0;
+}
 
 .item button{
 width:auto;
 padding:8px 10px;
-font-size:13px
+font-size:13px;
 }
 
 .badge{
 display:inline-block;
-padding:4px 8px;
+padding:5px 8px;
 border-radius:8px;
 font-size:12px;
-font-weight:bold
+font-weight:bold;
 }
 
 .badge-green{
 background:#dcfce7;
-color:#166534
+color:#166534;
 }
 
 .badge-red{
 background:#fee2e2;
-color:#991b1b
+color:#991b1b;
 }
 
 .badge-yellow{
 background:#fef3c7;
-color:#92400e
+color:#92400e;
 }
 
-.hidden{display:none}
-
-hr{
-border:0;
-border-top:1px solid #eee;
-margin:16px 0
+.badge-blue{
+background:#dbeafe;
+color:#1e40af;
 }
 
 nav{
@@ -151,7 +174,8 @@ border-top:1px solid #ddd;
 padding:8px;
 display:grid;
 grid-template-columns:repeat(5,1fr);
-z-index:10
+z-index:10;
+padding-bottom:calc(8px + env(safe-area-inset-bottom));
 }
 
 nav button{
@@ -159,40 +183,59 @@ background:white;
 color:#374151;
 font-size:11px;
 margin:0;
-padding:7px 2px
+padding:7px 2px;
 }
 
-.notice{
-padding:12px;
-border-radius:10px;
-background:#fef3c7;
-color:#92400e;
-margin:8px 0
+hr{
+border:0;
+border-top:1px solid #eee;
+margin:15px 0;
 }
 
-.success{
-padding:12px;
-border-radius:10px;
-background:#dcfce7;
-color:#166534;
-margin:8px 0
+.resumo{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
-.stat{
+.resumoBox{
 background:#f9fafb;
 border-radius:12px;
-padding:12px
+padding:12px;
 }
 
-@media(max-width:420px){
-.grid{grid-template-columns:1fr}
+.troco{
+background:#dcfce7;
+color:#166534;
+padding:14px;
+border-radius:12px;
+font-size:22px;
+font-weight:bold;
+text-align:center;
+margin:10px 0;
+}
+
+.negativo{
+background:#fee2e2;
+color:#991b1b;
+}
+
+.lista{
+max-height:500px;
+overflow:auto;
+}
+
+@media(max-width:430px){
+.grid{
+grid-template-columns:1fr;
+}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
 
 <div id="login" style="padding:35px 18px">
 
@@ -201,26 +244,24 @@ padding:12px
 <h1 class="center">🧾 Caixa Pro</h1>
 
 <p class="center muted">
-Controle completo de caixa
+Controle de Caixa
 </p>
 
-<input
-id="usuario"
+<input id="usuario"
 placeholder="Usuário"
 autocomplete="username">
 
-<input
-id="senha"
+<input id="senha"
 type="password"
 placeholder="Senha"
 autocomplete="current-password">
 
 <button onclick="entrar()">
-Entrar
+🔐 Entrar
 </button>
 
 <p class="center muted">
-Primeiro acesso: <b>admin</b> / <b>1234</b>
+Primeiro acesso: admin / 1234
 </p>
 
 </div>
@@ -228,7 +269,7 @@ Primeiro acesso: <b>admin</b> / <b>1234</b>
 </div>
 
 
-<!-- ================= APLICATIVO ================= -->
+<!-- APLICATIVO -->
 
 <div id="app" class="hidden">
 
@@ -237,8 +278,6 @@ Primeiro acesso: <b>admin</b> / <b>1234</b>
 <h1>🧾 Caixa Pro</h1>
 
 <div id="operador"></div>
-
-<small id="statusHeader"></small>
 
 </header>
 
@@ -278,29 +317,16 @@ Primeiro acesso: <b>admin</b> / <b>1234</b>
 ===================================================== */
 
 let banco =
-JSON.parse(
-localStorage.getItem("CAIXA_PRO") || "null"
-) || {
-
+JSON.parse(localStorage.getItem("CAIXA_PRO") || "null")
+||
+{
 produtos:[],
 clientes:[],
 vendas:[],
 movimentos:[],
 fechamentos:[],
 caixa:null
-
 };
-
-
-/* =====================================================
-   CORREÇÃO DE DADOS ANTIGOS
-===================================================== */
-
-if(!banco.produtos) banco.produtos=[];
-if(!banco.clientes) banco.clientes=[];
-if(!banco.vendas) banco.vendas=[];
-if(!banco.movimentos) banco.movimentos=[];
-if(!banco.fechamentos) banco.fechamentos=[];
 
 
 /* =====================================================
@@ -308,49 +334,40 @@ if(!banco.fechamentos) banco.fechamentos=[];
 ===================================================== */
 
 let operadores =
-JSON.parse(
-localStorage.getItem("CAIXA_OPERADORES") || "null"
-) || [
-
+JSON.parse(localStorage.getItem("CAIXA_OPERADORES") || "null")
+||
+[
 {
 nome:"Administrador",
 usuario:"admin",
-senha:"1234",
-admin:true
+senha:"1234"
 }
-
 ];
 
 
+let usuarioAtual="";
+let carrinho=[];
+
+
 /* =====================================================
-   GARANTE ADMIN
+   CORREÇÃO DE DADOS
 ===================================================== */
 
-if(
-!operadores.some(
-o=>o.usuario==="admin"
-)
-){
+if(!banco.produtos)banco.produtos=[];
+if(!banco.clientes)banco.clientes=[];
+if(!banco.vendas)banco.vendas=[];
+if(!banco.movimentos)banco.movimentos=[];
+if(!banco.fechamentos)banco.fechamentos=[];
 
-operadores.unshift({
+if(!operadores.length){
 
+operadores.push({
 nome:"Administrador",
 usuario:"admin",
-senha:"1234",
-admin:true
-
+senha:"1234"
 });
 
 }
-
-
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
-
-let usuarioAtual="";
-let operadorAtual=null;
-let carrinho=[];
 
 
 /* =====================================================
@@ -373,7 +390,7 @@ JSON.stringify(operadores)
 
 
 /* =====================================================
-   DINHEIRO
+   FORMATAÇÃO DE DINHEIRO
 ===================================================== */
 
 function dinheiro(valor){
@@ -390,17 +407,14 @@ currency:"BRL"
 
 
 /* =====================================================
-   ESCAPAR TEXTO
+   DATA
 ===================================================== */
 
-function esc(txt){
+function dataHora(data){
 
-return String(txt??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+return new Date(data).toLocaleString(
+"pt-BR"
+);
 
 }
 
@@ -411,18 +425,20 @@ return String(txt??"")
 
 function entrar(){
 
-let u=
+let u =
 document.getElementById("usuario")
 .value
 .trim();
 
-let s=
+let s =
 document.getElementById("senha")
 .value;
 
-let op=
+let op =
 operadores.find(
-x=>x.usuario===u && x.senha===s
+x =>
+x.usuario === u &&
+x.senha === s
 );
 
 if(!op){
@@ -434,7 +450,6 @@ return;
 }
 
 usuarioAtual=op.nome;
-operadorAtual=op;
 
 document
 .getElementById("login")
@@ -446,33 +461,10 @@ document
 
 document
 .getElementById("operador")
-.innerText=
+.innerText =
 "Operador: "+usuarioAtual;
 
-atualizarStatus();
-
 pagina("inicio");
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function atualizarStatus(){
-
-let status=
-document.getElementById("statusHeader");
-
-if(!status)return;
-
-status.innerText=
-banco.caixa
-?
-"🟢 Caixa aberto"
-:
-"🔴 Caixa fechado";
 
 }
 
@@ -483,13 +475,15 @@ banco.caixa
 
 function pagina(p){
 
-atualizarStatus();
+if(p==="inicio")inicio();
 
-if(p==="inicio") inicio();
-if(p==="venda") venda();
-if(p==="produtos") produtos();
-if(p==="clientes") clientes();
-if(p==="caixa") caixa();
+if(p==="venda")venda();
+
+if(p==="produtos")produtos();
+
+if(p==="clientes")clientes();
+
+if(p==="caixa")caixa();
 
 }
 
@@ -500,18 +494,18 @@ if(p==="caixa") caixa();
 
 function inicio(){
 
-let ativas=
+let ativas =
 banco.vendas.filter(
 v=>!v.cancelada
 );
 
-let faturamento=
+let faturamento =
 ativas.reduce(
 (a,v)=>a+Number(v.total),
 0
 );
 
-let dinheiroVendas=
+let dinheiroTotal =
 ativas
 .filter(v=>v.pagamento==="Dinheiro")
 .reduce(
@@ -519,35 +513,15 @@ ativas
 0
 );
 
-let pix=
-ativas
-.filter(v=>v.pagamento==="Pix")
-.reduce(
-(a,v)=>a+Number(v.total),
-0
-);
-
-let cartao=
-ativas
-.filter(v=>
-v.pagamento==="Cartão de débito" ||
-v.pagamento==="Cartão de crédito"
-)
-.reduce(
-(a,v)=>a+Number(v.total),
-0
-);
-
-
 tela.innerHTML=`
 
 <div class="card">
 
 <h2>📊 Resumo</h2>
 
-<div class="grid">
+<div class="resumo">
 
-<div class="stat">
+<div class="resumoBox">
 
 <span class="muted">
 Vendas
@@ -559,7 +533,7 @@ ${ativas.length}
 
 </div>
 
-<div class="stat">
+<div class="resumoBox">
 
 <span class="muted">
 Faturamento
@@ -578,12 +552,12 @@ ${dinheiro(faturamento)}
 
 <div class="card">
 
-<h3>💰 Status do Caixa</h3>
+<h3>💰 Status do caixa</h3>
 
 <h2>
 ${banco.caixa
-?"🟢 ABERTO"
-:"🔴 FECHADO"}
+?"🟢 CAIXA ABERTO"
+:"🔴 CAIXA FECHADO"}
 </h2>
 
 ${
@@ -592,53 +566,31 @@ banco.caixa
 `
 <p>
 Troco inicial:
-<b>${dinheiro(banco.caixa.inicial)}</b>
+<b>
+${dinheiro(banco.caixa.inicial)}
+</b>
 </p>
+`
+:
+""
+}
 
 <button
-class="blue"
 onclick="pagina('venda')">
 
 🛒 Nova venda
 
 </button>
-`
-:
-`
-<div class="notice">
-Abra o caixa antes de realizar vendas.
-</div>
-
-<button
-class="green"
-onclick="pagina('caixa')">
-
-🔓 Abrir caixa
-
-</button>
-`
-}
 
 </div>
 
 
 <div class="card">
 
-<h3>💳 Vendas por pagamento</h3>
+<h3>📈 Vendas em dinheiro</h3>
 
-<div class="item">
-<span>Dinheiro</span>
-<b>${dinheiro(dinheiroVendas)}</b>
-</div>
-
-<div class="item">
-<span>Pix</span>
-<b>${dinheiro(pix)}</b>
-</div>
-
-<div class="item">
-<span>Cartões</span>
-<b>${dinheiro(cartao)}</b>
+<div class="valor">
+${dinheiro(dinheiroTotal)}
 </div>
 
 </div>
@@ -648,10 +600,13 @@ onclick="pagina('caixa')">
 
 <h3>🧾 Últimas vendas</h3>
 
+<div class="lista">
+
 ${
 banco.vendas
-.slice(-10)
+.slice()
 .reverse()
+.slice(0,10)
 .map(v=>`
 
 <div class="item">
@@ -659,14 +614,13 @@ banco.vendas
 <span>
 
 <b>
-${esc(v.pagamento)}
+${v.pagamento}
 </b>
 
 <br>
 
 <small>
-${new Date(v.data)
-.toLocaleString("pt-BR")}
+${dataHora(v.data)}
 </small>
 
 <br>
@@ -674,16 +628,21 @@ ${new Date(v.data)
 ${
 v.cancelada
 ?
-`<span class="badge badge-red">
+`
+<span class="badge badge-red">
 CANCELADA
-</span>`
+</span>
+`
 :
-`<span class="badge badge-green">
+`
+<span class="badge badge-green">
 ATIVA
-</span>`
+</span>
+`
 }
 
 </span>
+
 
 <span style="text-align:right">
 
@@ -721,6 +680,8 @@ Cancelar
 
 </div>
 
+</div>
+
 `;
 
 }
@@ -732,10 +693,9 @@ Cancelar
 
 function venda(){
 
-let total=
+let total =
 carrinho.reduce(
-(a,x)=>a+
-(Number(x.preco)*Number(x.qtd)),
+(a,x)=>a+(x.preco*x.qtd),
 0
 );
 
@@ -749,15 +709,18 @@ ${
 !banco.caixa
 ?
 `
-<div class="notice">
-O caixa está fechado.
+<div class="badge badge-red">
+CAIXA FECHADO
 </div>
 
+<p>
+Abra o caixa antes de realizar uma venda.
+</p>
+
 <button
-class="green"
 onclick="pagina('caixa')">
 
-Abrir caixa
+💰 Abrir caixa
 
 </button>
 `
@@ -767,8 +730,7 @@ Abrir caixa
 
 <input
 id="busca"
-placeholder="Nome ou código do produto"
-autocomplete="off">
+placeholder="Nome ou código do produto">
 
 <div class="grid">
 
@@ -781,7 +743,7 @@ min="1">
 <button
 onclick="adicionar()">
 
-Adicionar
+➕ Adicionar
 
 </button>
 
@@ -792,7 +754,7 @@ Adicionar
 
 <div class="card">
 
-<h3>🛍️ Carrinho</h3>
+<h3>🛒 Carrinho</h3>
 
 ${
 carrinho.map((x,i)=>`
@@ -801,7 +763,9 @@ carrinho.map((x,i)=>`
 
 <span>
 
-<b>${esc(x.nome)}</b>
+<b>
+${x.nome}
+</b>
 
 <br>
 
@@ -810,6 +774,7 @@ ${x.qtd} × ${dinheiro(x.preco)}
 </small>
 
 </span>
+
 
 <span style="text-align:right">
 
@@ -839,26 +804,26 @@ Remover
 
 <hr>
 
-<div class="big">
+<h2>
 TOTAL: ${dinheiro(total)}
-</div>
+</h2>
 
-<br>
-
-<label>
-<strong>Forma de pagamento</strong>
-</label>
 
 <select id="pagamento"
 onchange="atualizarPagamento()">
 
 <option>Dinheiro</option>
+
 <option>Pix</option>
+
 <option>Cartão de débito</option>
+
 <option>Cartão de crédito</option>
+
 <option>Fiado</option>
 
 </select>
+
 
 <div id="areaDinheiro">
 
@@ -867,26 +832,17 @@ id="recebido"
 type="number"
 step="0.01"
 inputmode="decimal"
-placeholder="Valor recebido">
+placeholder="💵 Valor recebido">
 
-<button
-class="blue"
-onclick="calcularTroco()">
-
-💵 Calcular troco
-
-</button>
-
-<div
-id="trocoVenda"
-class="valor"
-style="margin:12px 0">
+<div id="trocoVenda"
+class="troco">
 
 Troco: R$ 0,00
 
 </div>
 
 </div>
+
 
 <button
 class="green"
@@ -896,100 +852,110 @@ onclick="finalizar()">
 
 </button>
 
+<button
+class="gray"
+onclick="limparCarrinho()">
+
+🗑️ Limpar venda
+
+</button>
+
 </div>
 
 `;
 
-
-atualizarPagamento();
-
 }
 
 
 /* =====================================================
-   ATUALIZA PAGAMENTO
+   PAGAMENTO
 ===================================================== */
 
 function atualizarPagamento(){
 
-let pagamento=
-document.getElementById("pagamento");
+let pag =
+document.getElementById("pagamento").value;
 
-let area=
+let area =
 document.getElementById("areaDinheiro");
 
-if(!pagamento||!area)return;
+if(pag==="Dinheiro"){
 
-area.style.display=
-pagamento.value==="Dinheiro"
-?
-"block"
-:
-"none";
+area.style.display="block";
+
+}
+else{
+
+area.style.display="none";
+
+}
 
 }
 
 
 /* =====================================================
-   TROCO
+   TROCO AUTOMÁTICO
 ===================================================== */
 
-function calcularTroco(){
+document.addEventListener(
+"input",
+function(e){
 
-let total=
+if(e.target.id!=="recebido")
+return;
+
+if(!document.getElementById("trocoVenda"))
+return;
+
+let total =
 carrinho.reduce(
 (a,x)=>a+x.preco*x.qtd,
 0
 );
 
-let recebido=
-parseFloat(
-document.getElementById("recebido").value
-)||0;
+let recebido =
+parseFloat(e.target.value)||0;
 
-let troco=
+let troco =
 recebido-total;
 
-let campo=
+let elemento =
 document.getElementById("trocoVenda");
 
-if(troco<0){
+if(recebido<total){
 
-campo.innerText=
-"Falta: "+dinheiro(Math.abs(troco));
+elemento.className="troco negativo";
 
-return;
+elemento.innerText =
+"Falta: "+dinheiro(total-recebido);
 
 }
+else{
 
-campo.innerText=
+elemento.className="troco";
+
+elemento.innerText =
 "Troco: "+dinheiro(troco);
 
 }
 
+});
+
 
 /* =====================================================
-   ADICIONAR PRODUTO
+   ADICIONAR AO CARRINHO
 ===================================================== */
 
 function adicionar(){
 
-if(!banco.caixa){
-
-alert("Abra o caixa antes de vender.");
-
-return;
-
-}
-
-let texto=
+let texto =
 document
 .getElementById("busca")
 .value
 .trim()
 .toLowerCase();
 
-let qtd=
+let qtd =
 Math.max(
 1,
 parseInt(
@@ -1001,40 +967,42 @@ document
 
 if(!texto){
 
-alert("Informe o produto.");
+alert(
+"Digite o nome ou código do produto."
+);
 
 return;
 
 }
 
-let p=
+let p =
 banco.produtos.find(
-x=>
-x.nome.toLowerCase()===texto
-||
-String(x.codigo||"").toLowerCase()===texto
+x =>
+x.nome.toLowerCase()===texto ||
+String(x.codigo)===texto
 );
 
 if(!p){
 
-alert("Produto não encontrado.");
-
-return;
-
-}
-
-if(Number(p.estoque)<qtd){
-
 alert(
-"Estoque insuficiente.\n\n"+
-"Disponível: "+p.estoque
+"Produto não encontrado."
 );
 
 return;
 
 }
 
-let existente=
+if(p.estoque<qtd){
+
+alert(
+"Estoque insuficiente."
+);
+
+return;
+
+}
+
+let existente =
 carrinho.find(
 x=>x.id===p.id
 );
@@ -1042,8 +1010,8 @@ x=>x.id===p.id
 if(existente){
 
 if(
-existente.qtd+qtd>
-Number(p.estoque)
+existente.qtd+qtd >
+p.estoque
 ){
 
 alert(
@@ -1062,8 +1030,11 @@ else{
 carrinho.push({
 
 id:p.id,
+
 nome:p.nome,
+
 preco:Number(p.preco),
+
 qtd:qtd
 
 });
@@ -1076,12 +1047,35 @@ venda();
 
 
 /* =====================================================
-   REMOVER ITEM DO CARRINHO
+   REMOVER ITEM
 ===================================================== */
 
 function remover(i){
 
 carrinho.splice(i,1);
+
+venda();
+
+}
+
+
+/* =====================================================
+   LIMPAR CARRINHO
+===================================================== */
+
+function limparCarrinho(){
+
+if(!carrinho.length)
+return;
+
+if(
+!confirm(
+"Limpar todos os produtos desta venda?"
+)
+)
+return;
+
+carrinho=[];
 
 venda();
 
@@ -1106,38 +1100,41 @@ return;
 
 if(!carrinho.length){
 
-alert("Carrinho vazio.");
+alert(
+"Carrinho vazio."
+);
 
 return;
 
 }
 
-let total=
+let total =
 carrinho.reduce(
 (a,x)=>a+x.preco*x.qtd,
 0
 );
 
-let pag=
+let pag =
 document
 .getElementById("pagamento")
 .value;
 
-let rec=
-total;
-
-let troco=0;
-
-if(pag==="Dinheiro"){
-
-rec=
+let rec =
+pag==="Dinheiro"
+?
 parseFloat(
 document
 .getElementById("recebido")
 .value
-)||0;
+)||0
+:
+total;
 
-if(rec<total){
+
+if(
+pag==="Dinheiro" &&
+rec<total
+){
 
 alert(
 "Valor recebido menor que o total."
@@ -1147,105 +1144,82 @@ return;
 
 }
 
-troco=rec-total;
-
-}
-
 
 let cliente="";
 
 if(pag==="Fiado"){
 
-cliente=
-prompt("Nome do cliente:");
-
-if(!cliente)return;
-
-}
-
-
-/* Confere estoque novamente */
-
-for(let item of carrinho){
-
-let p=
-banco.produtos.find(
-x=>x.id===item.id
+cliente =
+prompt(
+"Nome do cliente:"
 );
 
-if(!p||p.estoque<item.qtd){
-
-alert(
-"O estoque mudou.\n"+
-"Confira os produtos."
-);
-
+if(!cliente)
 return;
 
 }
 
-}
 
+/* Guardar itens */
 
-/* Itens */
-
-let itens=
+let itens =
 carrinho.map(x=>({
 
 id:x.id,
+
 nome:x.nome,
+
 preco:x.preco,
+
 qtd:x.qtd
 
 }));
 
 
-/* Baixa estoque */
+/* Baixar estoque */
 
-carrinho.forEach(item=>{
+carrinho.forEach(x=>{
 
-let p=
+let p =
 banco.produtos.find(
-x=>x.id===item.id
+p=>p.id===x.id
 );
 
-p.estoque-=item.qtd;
+if(p){
+
+p.estoque-=x.qtd;
+
+}
 
 });
 
-
-/* Venda */
 
 let novaVenda={
 
 id:Date.now(),
 
-data:
-new Date().toISOString(),
+data:new Date().toISOString(),
 
-operador:
-usuarioAtual,
+operador:usuarioAtual,
 
-caixaId:
-banco.caixa.id,
+caixaId:banco.caixa.id,
 
-total:
-total,
+total:total,
 
-pagamento:
-pag,
+pagamento:pag,
 
-recebido:
-rec,
+recebido:rec,
 
 troco:
-troco,
+pag==="Dinheiro"
+?
+rec-total
+:
+0,
 
-cliente:
-cliente,
+cliente:cliente,
 
-itens:
-itens,
+itens:itens,
 
 cancelada:false
 
@@ -1263,7 +1237,7 @@ alert(
 "✅ VENDA REALIZADA\n\n"+
 "Total: "+dinheiro(total)+
 "\nRecebido: "+dinheiro(rec)+
-"\nTroco: "+dinheiro(troco)
+"\nTroco: "+dinheiro(novaVenda.troco)
 );
 
 
@@ -1280,14 +1254,16 @@ pagina("venda");
 
 function cancelarVenda(id){
 
-let v=
+let v =
 banco.vendas.find(
 x=>x.id===id
 );
 
 if(!v){
 
-alert("Venda não encontrada.");
+alert(
+"Venda não encontrada."
+);
 
 return;
 
@@ -1295,26 +1271,29 @@ return;
 
 if(v.cancelada){
 
-alert("Essa venda já está cancelada.");
+alert(
+"Essa venda já está cancelada."
+);
 
 return;
 
 }
 
 
-let motivo=
+let motivo =
 prompt(
 "Informe o motivo do cancelamento:"
 );
 
-if(motivo===null)return;
+if(motivo===null)
+return;
 
 motivo=motivo.trim();
 
 if(!motivo){
 
 alert(
-"É necessário informar o motivo."
+"Informe o motivo."
 );
 
 return;
@@ -1322,33 +1301,33 @@ return;
 }
 
 
-let confirma=
+let confirmar =
 confirm(
 "⚠️ CONFIRMAR CANCELAMENTO?\n\n"+
-"Total: "+dinheiro(v.total)+
+"Valor: "+dinheiro(v.total)+
 "\nPagamento: "+v.pagamento+
-"\n\nMotivo: "+motivo
+"\n\nMotivo: "+motivo+
+"\n\nOs produtos voltarão ao estoque."
 );
 
-if(!confirma)return;
+if(!confirmar)
+return;
 
 
-/* Devolve estoque */
+/* Devolver estoque */
 
 if(v.itens){
 
 v.itens.forEach(item=>{
 
-let p=
+let p =
 banco.produtos.find(
-x=>x.id===item.id
+p=>p.id===item.id
 );
 
 if(p){
 
-p.estoque=
-Number(p.estoque)+
-Number(item.qtd);
+p.estoque+=item.qtd;
 
 }
 
@@ -1357,7 +1336,7 @@ Number(item.qtd);
 }
 
 
-/* Marca cancelada */
+/* Registrar cancelamento */
 
 v.cancelada=true;
 
@@ -1375,9 +1354,10 @@ salvar();
 
 
 alert(
-"❌ Venda cancelada.\n\n"+
-"Os produtos foram devolvidos ao estoque."
+"✅ VENDA CANCELADA\n\n"+
+"Produtos devolvidos ao estoque."
 );
+
 
 inicio();
 
@@ -1415,7 +1395,7 @@ placeholder="Preço de venda">
 id="pestoque"
 type="number"
 inputmode="numeric"
-placeholder="Estoque">
+placeholder="Quantidade em estoque">
 
 <button
 class="green"
@@ -1431,31 +1411,32 @@ onclick="cadastrarProduto()">
 <div class="card">
 
 <h3>
-Produtos cadastrados:
-${banco.produtos.length}
+📦 Produtos cadastrados
 </h3>
 
+<div class="lista">
+
 ${
-banco.produtos
-.map(p=>`
+banco.produtos.map(p=>`
 
 <div class="item">
 
 <span>
 
 <b>
-${esc(p.nome)}
+${p.nome}
 </b>
 
 <br>
 
 <small>
-Código: ${esc(p.codigo||"-")}
+Código: ${p.codigo||"-"}
 <br>
 Estoque: ${p.estoque}
 </small>
 
 </span>
+
 
 <span style="text-align:right">
 
@@ -1492,6 +1473,8 @@ Excluir
 
 </div>
 
+</div>
+
 `;
 
 }
@@ -1503,26 +1486,26 @@ Excluir
 
 function cadastrarProduto(){
 
-let nome=
+let nome =
 document
 .getElementById("pnome")
 .value
 .trim();
 
-let codigo=
+let codigo =
 document
 .getElementById("pcodigo")
 .value
 .trim();
 
-let preco=
+let preco =
 parseFloat(
 document
 .getElementById("ppreco")
 .value
 );
 
-let estoque=
+let estoque =
 parseInt(
 document
 .getElementById("pestoque")
@@ -1532,7 +1515,9 @@ document
 
 if(!nome){
 
-alert("Informe o nome.");
+alert(
+"Informe o nome."
+);
 
 return;
 
@@ -1540,32 +1525,8 @@ return;
 
 if(!(preco>0)){
 
-alert("Informe um preço válido.");
-
-return;
-
-}
-
-if(estoque<0){
-
-alert("Estoque inválido.");
-
-return;
-
-}
-
-
-/* Evita código duplicado */
-
-if(
-codigo &&
-banco.produtos.some(
-p=>String(p.codigo)===codigo
-)
-){
-
 alert(
-"Já existe um produto com esse código."
+"Informe um preço válido."
 );
 
 return;
@@ -1591,7 +1552,7 @@ estoque:estoque
 salvar();
 
 alert(
-"Produto cadastrado com sucesso."
+"Produto cadastrado."
 );
 
 produtos();
@@ -1605,33 +1566,36 @@ produtos();
 
 function editarProduto(id){
 
-let p=
+let p =
 banco.produtos.find(
 x=>x.id===id
 );
 
-if(!p)return;
+if(!p)
+return;
 
 
-let nome=
+let nome =
 prompt(
 "Nome do produto:",
 p.nome
 );
 
-if(nome===null)return;
+if(nome===null)
+return;
 
 
-let codigo=
+let codigo =
 prompt(
 "Código de barras:",
 p.codigo||""
 );
 
-if(codigo===null)return;
+if(codigo===null)
+return;
 
 
-let preco=
+let preco =
 parseFloat(
 prompt(
 "Preço de venda:",
@@ -1641,14 +1605,16 @@ p.preco
 
 if(!(preco>0)){
 
-alert("Preço inválido.");
+alert(
+"Preço inválido."
+);
 
 return;
 
 }
 
 
-let estoque=
+let estoque =
 parseInt(
 prompt(
 "Estoque:",
@@ -1656,9 +1622,11 @@ p.estoque
 )
 );
 
-if(isNaN(estoque)||estoque<0){
+if(isNaN(estoque)){
 
-alert("Estoque inválido.");
+alert(
+"Estoque inválido."
+);
 
 return;
 
@@ -1666,8 +1634,11 @@ return;
 
 
 p.nome=nome.trim();
+
 p.codigo=codigo.trim();
+
 p.preco=preco;
+
 p.estoque=estoque;
 
 
@@ -1684,17 +1655,18 @@ produtos();
 
 function removerProduto(id){
 
-let p=
+let p =
 banco.produtos.find(
 x=>x.id===id
 );
 
-if(!p)return;
+if(!p)
+return;
 
 
-let usado=
+let usado =
 banco.vendas.some(
-v=>
+v =>
 v.itens &&
 v.itens.some(
 i=>i.id===id
@@ -1702,29 +1674,19 @@ i=>i.id===id
 );
 
 
-if(usado){
-
-let confirmar=
-confirm(
-"Esse produto aparece em vendas anteriores.\n\n"+
-"Excluir mesmo assim?"
-);
-
-if(!confirmar)return;
-
-}
-else{
-
-if(
-!confirm(
-"Excluir o produto '"+p.nome+"'?"
-)
-)return;
-
-}
+let mensagem =
+usado
+?
+"Este produto já aparece em vendas.\n\nExcluir mesmo assim?"
+:
+"Excluir o produto '"+p.nome+"'?";
 
 
-banco.produtos=
+if(!confirm(mensagem))
+return;
+
+
+banco.produtos =
 banco.produtos.filter(
 x=>x.id!==id
 );
@@ -1772,26 +1734,24 @@ onclick="cadastrarCliente()">
 <div class="card">
 
 <h3>
-Clientes cadastrados:
-${banco.clientes.length}
+Clientes cadastrados
 </h3>
 
 ${
-banco.clientes
-.map((c,i)=>`
+banco.clientes.map((c,i)=>`
 
 <div class="item">
 
 <span>
 
 <b>
-${esc(c.nome)}
+${c.nome}
 </b>
 
 <br>
 
 <small>
-${esc(c.telefone||"")}
+${c.telefone||"Sem telefone"}
 </small>
 
 </span>
@@ -1825,13 +1785,13 @@ Excluir
 
 function cadastrarCliente(){
 
-let nome=
+let nome =
 document
 .getElementById("cnome")
 .value
 .trim();
 
-let telefone=
+let telefone =
 document
 .getElementById("ctelefone")
 .value
@@ -1839,11 +1799,14 @@ document
 
 if(!nome){
 
-alert("Informe o nome.");
+alert(
+"Informe o nome."
+);
 
 return;
 
 }
+
 
 banco.clientes.push({
 
@@ -1854,6 +1817,7 @@ nome:nome,
 telefone:telefone
 
 });
+
 
 salvar();
 
@@ -1869,10 +1833,16 @@ clientes();
 function removerCliente(i){
 
 if(
-!confirm("Excluir este cliente?")
-)return;
+!confirm(
+"Excluir este cliente?"
+)
+)
+return;
 
-banco.clientes.splice(i,1);
+banco.clientes.splice(
+i,
+1
+);
 
 salvar();
 
@@ -1887,28 +1857,28 @@ clientes();
 
 function calcularSaldoCaixa(){
 
-if(!banco.caixa)return 0;
+if(!banco.caixa)
+return 0;
 
-let saldo=
-Number(banco.caixa.inicial)||0;
+let saldo =
+Number(
+banco.caixa.inicial
+)||0;
 
 
 /* Vendas em dinheiro */
 
 banco.vendas
-.filter(v=>
+.filter(
+v =>
 !v.cancelada &&
 v.pagamento==="Dinheiro" &&
 v.caixaId===banco.caixa.id
 )
 .forEach(v=>{
 
-/*
-No caixa entra o valor efetivamente recebido.
-*/
-
-saldo+=
-Number(v.recebido)||0;
+saldo +=
+Number(v.total)||0;
 
 });
 
@@ -1921,35 +1891,11 @@ m=>m.caixaId===banco.caixa.id
 )
 .forEach(m=>{
 
-if(m.tipo==="Entrada"){
-
+if(m.tipo==="Entrada")
 saldo+=Number(m.valor)||0;
 
-}
-else{
-
+if(m.tipo==="Saída")
 saldo-=Number(m.valor)||0;
-
-}
-
-});
-
-
-/*
-Quando uma venda em dinheiro é cancelada,
-o valor recebido precisa sair novamente do caixa.
-*/
-
-banco.vendas
-.filter(v=>
-v.cancelada &&
-v.pagamento==="Dinheiro" &&
-v.caixaId===banco.caixa.id
-)
-.forEach(v=>{
-
-saldo-=
-Number(v.recebido)||0;
 
 });
 
@@ -1960,124 +1906,47 @@ return saldo;
 
 
 /* =====================================================
-   RESUMO DE VENDAS DO CAIXA
-===================================================== */
-
-function resumoCaixa(){
-
-if(!banco.caixa){
-
-return {
-
-quantidade:0,
-total:0,
-dinheiro:0,
-pix:0,
-debito:0,
-credito:0,
-fiado:0
-
-};
-
-}
-
-let lista=
-banco.vendas.filter(
-v=>
-!v.cancelada &&
-v.caixaId===banco.caixa.id
-);
-
-
-let resultado={
-
-quantidade:lista.length,
-total:0,
-dinheiro:0,
-pix:0,
-debito:0,
-credito:0,
-fiado:0
-
-};
-
-
-lista.forEach(v=>{
-
-resultado.total+=Number(v.total)||0;
-
-if(v.pagamento==="Dinheiro")
-resultado.dinheiro+=Number(v.total)||0;
-
-if(v.pagamento==="Pix")
-resultado.pix+=Number(v.total)||0;
-
-if(v.pagamento==="Cartão de débito")
-resultado.debito+=Number(v.total)||0;
-
-if(v.pagamento==="Cartão de crédito")
-resultado.credito+=Number(v.total)||0;
-
-if(v.pagamento==="Fiado")
-resultado.fiado+=Number(v.total)||0;
-
-});
-
-
-return resultado;
-
-}
-
-
-/* =====================================================
    CAIXA
 ===================================================== */
 
 function caixa(){
 
-atualizarStatus();
-
-
-if(banco.caixa){
-
-let saldo=
+let saldo =
 calcularSaldoCaixa();
-
-let resumo=
-resumoCaixa();
 
 
 tela.innerHTML=`
 
 <div class="card">
 
-<h2>💰 Caixa</h2>
+<h2>💰 Controle de Caixa</h2>
 
-<h3>
+${
+banco.caixa
+?
+`
+
+<div class="badge badge-green">
 🟢 CAIXA ABERTO
-</h3>
+</div>
 
 <p>
 Operador:
 <b>
-${esc(banco.caixa.operador)}
+${banco.caixa.operador}
 </b>
 </p>
 
 <p>
-Abertura:
+Aberto em:
 <br>
-${new Date(
-banco.caixa.abertura
-).toLocaleString("pt-BR")}
+${dataHora(banco.caixa.abertura)}
 </p>
 
 <hr>
 
 <p>
-<strong>
-💵 Troco inicial
-</strong>
+Troco / valor inicial
 </p>
 
 <div class="valor">
@@ -2085,12 +1954,10 @@ ${dinheiro(banco.caixa.inicial)}
 </div>
 
 <p>
-<strong>
-💰 Saldo esperado
-</strong>
+Saldo esperado
 </p>
 
-<div class="big">
+<div class="grande">
 ${dinheiro(saldo)}
 </div>
 
@@ -2099,7 +1966,7 @@ id="contado"
 type="number"
 step="0.01"
 inputmode="decimal"
-placeholder="Digite o dinheiro contado">
+placeholder="💵 Dinheiro contado no caixa">
 
 <button
 class="danger"
@@ -2109,57 +1976,51 @@ onclick="fecharCaixa()">
 
 </button>
 
+`
+:
+`
+
+<div class="badge badge-red">
+🔴 CAIXA FECHADO
 </div>
 
+<p>
+Informe o dinheiro que ficará no caixa como troco inicial.
+</p>
 
-<div class="card">
-
-<h3>📊 Resumo deste caixa</h3>
-
-<div class="item">
-<span>Vendas</span>
-<b>${resumo.quantidade}</b>
-</div>
-
-<div class="item">
-<span>Total vendido</span>
-<b>${dinheiro(resumo.total)}</b>
-</div>
-
-<div class="item">
-<span>Dinheiro</span>
-<b>${dinheiro(resumo.dinheiro)}</b>
-</div>
-
-<div class="item">
-<span>Pix</span>
-<b>${dinheiro(resumo.pix)}</b>
-</div>
-
-<div class="item">
-<span>Débito</span>
-<b>${dinheiro(resumo.debito)}</b>
-</div>
-
-<div class="item">
-<span>Crédito</span>
-<b>${dinheiro(resumo.credito)}</b>
-</div>
-
-<div class="item">
-<span>Fiado</span>
-<b>${dinheiro(resumo.fiado)}</b>
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>💵 Movimentação</h3>
+<input
+id="inicial"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="💵 Troco / valor inicial">
 
 <button
 class="green"
+onclick="abrirCaixa()">
+
+🔓 Abrir caixa
+
+</button>
+
+`
+}
+
+</div>
+
+
+${
+banco.caixa
+?
+`
+
+<div class="card">
+
+<h3>
+💵 Movimentação
+</h3>
+
+<button
 onclick="movimento('Entrada')">
 
 ➕ Entrada de dinheiro
@@ -2176,107 +2037,93 @@ onclick="movimento('Saída')">
 
 </div>
 
-
-<div class="card">
-
-<h3>👤 Operadores</h3>
-
-<button
-onclick="gerenciarOperadores()">
-
-Gerenciar operadores
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h3>📋 Relatórios</h3>
-
-<button
-onclick="relatorioVendas()">
-
-📄 Ver vendas
-
-</button>
-
-<button
-onclick="relatorioMovimentos()">
-
-💵 Ver entradas e saídas
-
-</button>
-
-<button
-onclick="historicoCaixas()">
-
-🗂️ Histórico de caixas
-
-</button>
-
-<button
-onclick="exportar()">
-
-📥 Exportar vendas CSV
-
-</button>
-
-</div>
-
-`;
-
-return;
-
+`
+:
+""
 }
 
 
-/* CAIXA FECHADO */
-
-tela.innerHTML=`
+${
+banco.caixa
+?
+`
 
 <div class="card">
 
-<h2>💰 Caixa</h2>
-
 <h3>
-🔴 CAIXA FECHADO
+📋 Movimentações do caixa
 </h3>
 
-<p class="muted">
+<div class="lista">
 
-Informe quanto dinheiro estará no caixa
-no início do expediente.
+${
+banco.movimentos
+.filter(
+m=>m.caixaId===banco.caixa.id
+)
+.slice()
+.reverse()
+.map(m=>`
 
-</p>
+<div class="item">
 
-<input
-id="inicial"
-type="number"
-step="0.01"
-inputmode="decimal"
-placeholder="Troco / valor inicial">
+<span>
 
-<button
-class="green"
-onclick="abrirCaixa()">
+<b>
+${m.tipo}
+</b>
 
-🔓 Abrir caixa
+<br>
 
-</button>
+<small>
+${dataHora(m.data)}
+</small>
+
+<br>
+
+<small>
+${m.descricao||"Sem descrição"}
+</small>
+
+</span>
+
+<span>
+
+<b>
+${m.tipo==="Entrada"?"+":"-"}
+${dinheiro(m.valor)}
+</b>
+
+</span>
 
 </div>
 
+`)
+.join("")
+||
+"<p class='muted'>Nenhuma movimentação.</p>"
+}
+
+</div>
+
+</div>
+
+`
+:
+""
+}
+
 
 <div class="card">
 
-<h3>👤 Operadores</h3>
+<h3>
+👤 Operadores
+</h3>
 
 <button
 onclick="gerenciarOperadores()">
 
-Gerenciar operadores
+⚙️ Gerenciar operadores
 
 </button>
 
@@ -2285,23 +2132,40 @@ Gerenciar operadores
 
 <div class="card">
 
-<h3>📋 Relatórios</h3>
+<h3>
+📊 Relatório
+</h3>
+
+<p>
+Vendas ativas:
+<b>
+${banco.vendas.filter(v=>!v.cancelada).length}
+</b>
+</p>
+
+<p>
+Vendas canceladas:
+<b>
+${banco.vendas.filter(v=>v.cancelada).length}
+</b>
+</p>
+
+<p>
+Produtos:
+<b>
+${banco.produtos.length}
+</b>
+</p>
+
+<p>
+Clientes:
+<b>
+${banco.clientes.length}
+</b>
+</p>
 
 <button
-onclick="relatorioVendas()">
-
-📄 Ver vendas
-
-</button>
-
-<button
-onclick="historicoCaixas()">
-
-🗂️ Histórico de caixas
-
-</button>
-
-<button
+class="blue"
 onclick="exportar()">
 
 📥 Exportar vendas CSV
@@ -2331,12 +2195,15 @@ return;
 
 }
 
-let valor=
+
+let campo =
+document.getElementById("inicial");
+
+let valor =
 parseFloat(
-document
-.getElementById("inicial")
-.value
+campo.value
 )||0;
+
 
 if(valor<0){
 
@@ -2366,14 +2233,13 @@ usuarioAtual
 
 salvar();
 
-atualizarStatus();
-
 
 alert(
 "✅ CAIXA ABERTO\n\n"+
 "Troco inicial: "+
 dinheiro(valor)
 );
+
 
 caixa();
 
@@ -2388,67 +2254,54 @@ function fecharCaixa(){
 
 if(!banco.caixa){
 
-alert("O caixa já está fechado.");
-
-return;
-
-}
-
-let esperado=
-calcularSaldoCaixa();
-
-let campo=
-document.getElementById("contado");
-
-let contado=
-parseFloat(campo.value);
-
-if(isNaN(contado)||contado<0){
-
 alert(
-"Informe o dinheiro contado no caixa."
+"O caixa já está fechado."
 );
 
 return;
 
 }
 
-let diferenca=
+
+let esperado =
+calcularSaldoCaixa();
+
+let contado =
+parseFloat(
+document
+.getElementById("contado")
+.value
+)||0;
+
+
+let diferenca =
 contado-esperado;
 
 
-let confirmar=
+let confirmar =
 confirm(
-"🔒 CONFIRMAR FECHAMENTO?\n\n"+
+"CONFIRMAR FECHAMENTO?\n\n"+
 "Esperado: "+dinheiro(esperado)+
 "\nContado: "+dinheiro(contado)+
 "\nDiferença: "+dinheiro(diferenca)
 );
 
-if(!confirmar)return;
+if(!confirmar)
+return;
 
 
 let fechamento={
 
 id:Date.now(),
 
+data:
+new Date().toISOString(),
+
 caixaId:
 banco.caixa.id,
 
-abertura:
-banco.caixa.abertura,
-
-fechamento:
-new Date().toISOString(),
-
-operadorAbertura:
-banco.caixa.operador,
-
-operadorFechamento:
+operador:
 usuarioAtual,
-
-inicial:
-banco.caixa.inicial,
 
 esperado:
 esperado,
@@ -2470,29 +2323,37 @@ banco.caixa=null;
 
 salvar();
 
-atualizarStatus();
 
-
-let texto=
-diferenca===0
-?
-"CAIXA FECHADO SEM DIFERENÇA."
-:
-diferenca>0
-?
-"CAIXA FECHADO COM SOBRA."
-:
-"CAIXA FECHADO COM FALTA.";
-
-
-alert(
-"🔒 "+texto+
-"\n\n"+
+let mensagem =
+"🔒 CAIXA FECHADO\n\n"+
 "Esperado: "+dinheiro(esperado)+
 "\nContado: "+dinheiro(contado)+
-"\nDiferença: "+dinheiro(diferenca)
-);
+"\nDiferença: "+dinheiro(diferenca);
 
+
+if(diferenca>0){
+
+mensagem +=
+"\n\nSobra: "+dinheiro(diferenca);
+
+}
+
+if(diferenca<0){
+
+mensagem +=
+"\n\nFalta: "+dinheiro(Math.abs(diferenca));
+
+}
+
+if(diferenca===0){
+
+mensagem +=
+"\n\n✅ Caixa conferido corretamente.";
+
+}
+
+
+alert(mensagem);
 
 caixa();
 
@@ -2516,23 +2377,23 @@ return;
 }
 
 
-let valor=
+let valor =
 parseFloat(
 prompt(
 "Valor da "+tipo+":"
 )
 );
 
-if(!(valor>0))return;
+
+if(!(valor>0))
+return;
 
 
-let descricao=
+let descricao =
 prompt(
 "Descrição da "+tipo+":"
-);
-
-
-if(descricao===null)return;
+)
+||"";
 
 
 banco.movimentos.push({
@@ -2546,8 +2407,7 @@ tipo:tipo,
 
 valor:valor,
 
-descricao:
-descricao.trim(),
+descricao:descricao,
 
 operador:
 usuarioAtual,
@@ -2561,8 +2421,7 @@ new Date().toISOString()
 salvar();
 
 alert(
-"Movimentação registrada:\n"+
-tipo+" - "+dinheiro(valor)
+tipo+" registrada: "+dinheiro(valor)
 );
 
 caixa();
@@ -2576,10 +2435,7 @@ caixa();
 
 function gerenciarOperadores(){
 
-if(
-!operadorAtual ||
-!operadorAtual.admin
-){
+if(usuarioAtual!=="Administrador"){
 
 alert(
 "Somente o Administrador pode gerenciar operadores."
@@ -2594,12 +2450,9 @@ tela.innerHTML=`
 
 <div class="card">
 
-<h2>👤 Operadores</h2>
-
-<p class="muted">
-Somente o Administrador pode adicionar
-ou excluir operadores.
-</p>
+<h2>
+👤 Operadores
+</h2>
 
 <input
 id="novoNome"
@@ -2614,15 +2467,6 @@ id="novaSenha"
 type="password"
 placeholder="Senha">
 
-<label>
-<input
-id="novoAdmin"
-type="checkbox"
-style="width:auto">
-
- Administrador
-</label>
-
 <button
 class="green"
 onclick="adicionarOperador()">
@@ -2633,7 +2477,7 @@ onclick="adicionarOperador()">
 
 <button
 class="gray"
-onclick="caixa()">
+onclick="pagina('caixa')">
 
 Voltar
 
@@ -2644,7 +2488,9 @@ Voltar
 
 <div class="card">
 
-<h3>Operadores cadastrados</h3>
+<h3>
+Operadores cadastrados
+</h3>
 
 ${
 operadores.map((o,i)=>`
@@ -2654,34 +2500,27 @@ operadores.map((o,i)=>`
 <span>
 
 <b>
-${esc(o.nome)}
+${o.nome}
 </b>
 
 <br>
 
 <small>
-Usuário: ${esc(o.usuario)}
+Usuário: ${o.usuario}
 </small>
-
-<br>
-
-${
-o.admin
-?
-`<span class="badge badge-yellow">
-Administrador
-</span>`
-:
-`<span class="badge badge-green">
-Operador
-</span>`
-}
 
 </span>
 
+
 ${
-o.usuario!=="admin"
+o.usuario==="admin"
 ?
+`
+<span class="badge badge-yellow">
+Administrador
+</span>
+`
+:
 `
 <button
 class="danger"
@@ -2691,10 +2530,6 @@ Excluir
 
 </button>
 `
-:
-`<span class="badge badge-yellow">
-Principal
-</span>`
 }
 
 </div>
@@ -2716,33 +2551,28 @@ Principal
 
 function adicionarOperador(){
 
-let nome=
+let nome =
 document
 .getElementById("novoNome")
 .value
 .trim();
 
-let usuario=
+let usuario =
 document
 .getElementById("novoUsuario")
 .value
 .trim();
 
-let senha=
+let senha =
 document
 .getElementById("novaSenha")
 .value;
-
-let admin=
-document
-.getElementById("novoAdmin")
-.checked;
 
 
 if(!nome||!usuario||!senha){
 
 alert(
-"Preencha nome, usuário e senha."
+"Preencha todos os campos."
 );
 
 return;
@@ -2768,18 +2598,21 @@ return;
 operadores.push({
 
 nome:nome,
+
 usuario:usuario,
-senha:senha,
-admin:admin
+
+senha:senha
 
 });
 
 
 salvar();
 
+
 alert(
-"✅ Operador adicionado com sucesso."
+"✅ Operador adicionado."
 );
+
 
 gerenciarOperadores();
 
@@ -2797,7 +2630,7 @@ operadores[i].usuario==="admin"
 ){
 
 alert(
-"O Administrador principal não pode ser excluído."
+"O Administrador não pode ser excluído."
 );
 
 return;
@@ -2811,10 +2644,14 @@ if(
 operadores[i].nome+
 "?"
 )
-)return;
+)
+return;
 
 
-operadores.splice(i,1);
+operadores.splice(
+i,
+1
+);
 
 salvar();
 
@@ -2824,345 +2661,34 @@ gerenciarOperadores();
 
 
 /* =====================================================
-   RELATÓRIO DE VENDAS
-===================================================== */
-
-function relatorioVendas(){
-
-let lista=
-banco.vendas
-.slice()
-.reverse();
-
-
-tela.innerHTML=`
-
-<div class="card">
-
-<h2>📄 Vendas</h2>
-
-<button
-class="gray"
-onclick="caixa()">
-
-Voltar
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-${
-lista.map(v=>`
-
-<div class="item">
-
-<span>
-
-<b>
-${v.cancelada?"❌ CANCELADA":"✅ VENDA"}
-</b>
-
-<br>
-
-<small>
-${new Date(v.data)
-.toLocaleString("pt-BR")}
-</small>
-
-<br>
-
-<small>
-Operador: ${esc(v.operador)}
-</small>
-
-<br>
-
-<small>
-Pagamento: ${esc(v.pagamento)}
-</small>
-
-${
-v.cancelada
-?
-`
-<br>
-<small>
-Motivo: ${esc(v.motivoCancelamento)}
-</small>
-`
-:
-""
-}
-
-</span>
-
-<span style="text-align:right">
-
-<b>
-${dinheiro(v.total)}
-</b>
-
-${
-!v.cancelada
-?
-`
-<br>
-
-<button
-class="danger"
-onclick="cancelarVenda(${v.id})">
-
-Cancelar
-
-</button>
-`
-:
-""
-}
-
-</span>
-
-</div>
-
-`)
-.join("")
-||
-"<p class='muted'>Nenhuma venda registrada.</p>"
-}
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-   RELATÓRIO MOVIMENTAÇÕES
-===================================================== */
-
-function relatorioMovimentos(){
-
-let lista=
-banco.movimentos
-.slice()
-.reverse();
-
-
-tela.innerHTML=`
-
-<div class="card">
-
-<h2>💵 Entradas e Saídas</h2>
-
-<button
-class="gray"
-onclick="caixa()">
-
-Voltar
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-${
-lista.map(m=>`
-
-<div class="item">
-
-<span>
-
-<b>
-${m.tipo==="Entrada"?"➕ Entrada":"➖ Saída"}
-</b>
-
-<br>
-
-<small>
-${new Date(m.data)
-.toLocaleString("pt-BR")}
-</small>
-
-<br>
-
-<small>
-${esc(m.descricao)}
-</small>
-
-<br>
-
-<small>
-Operador: ${esc(m.operador)}
-</small>
-
-</span>
-
-<b>
-${dinheiro(m.valor)}
-</b>
-
-</div>
-
-`)
-.join("")
-||
-"<p class='muted'>Nenhuma movimentação.</p>"
-}
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-   HISTÓRICO DE CAIXAS
-===================================================== */
-
-function historicoCaixas(){
-
-let lista=
-(banco.fechamentos||[])
-.slice()
-.reverse();
-
-
-tela.innerHTML=`
-
-<div class="card">
-
-<h2>🗂️ Histórico de Caixas</h2>
-
-<button
-class="gray"
-onclick="caixa()">
-
-Voltar
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-${
-lista.map(f=>`
-
-<div class="item">
-
-<span>
-
-<b>
-Caixa fechado
-</b>
-
-<br>
-
-<small>
-Abertura:
-${new Date(f.abertura)
-.toLocaleString("pt-BR")}
-</small>
-
-<br>
-
-<small>
-Fechamento:
-${new Date(f.fechamento)
-.toLocaleString("pt-BR")}
-</small>
-
-<br>
-
-<small>
-Operador:
-${esc(f.operadorFechamento)}
-</small>
-
-</span>
-
-<span style="text-align:right">
-
-Esperado:
-<b>
-${dinheiro(f.esperado)}
-</b>
-
-<br>
-
-Contado:
-<b>
-${dinheiro(f.contado)}
-</b>
-
-<br>
-
-<b>
-${dinheiro(f.diferenca)}
-</b>
-
-</span>
-
-</div>
-
-`)
-.join("")
-||
-"<p class='muted'>Nenhum fechamento registrado.</p>"
-}
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-   EXPORTAR CSV
+   EXPORTAR VENDAS
 ===================================================== */
 
 function exportar(){
 
-let texto=
+let texto =
 "ID;Data;Operador;Caixa;Pagamento;Total;Recebido;Troco;Cliente;Status;Motivo\n";
 
 
 banco.vendas.forEach(v=>{
 
-texto+=
-[
-v.id,
-v.data,
-v.operador,
-v.caixaId||"",
-v.pagamento,
-v.total,
-v.recebido,
-v.troco,
-v.cliente||"",
-v.cancelada?"CANCELADA":"ATIVA",
-v.motivoCancelamento||""
-]
-.map(x=>
-String(x)
-.replace(/;/g,",")
-)
-.join(";")
-+"\n";
+texto +=
+`${v.id};`+
+`${v.data};`+
+`${v.operador};`+
+`${v.caixaId||""};`+
+`${v.pagamento};`+
+`${v.total};`+
+`${v.recebido};`+
+`${v.troco};`+
+`${v.cliente||""};`+
+`${v.cancelada?"CANCELADA":"ATIVA"};`+
+`${v.motivoCancelamento||""}\n`;
 
 });
 
 
-let blob=
+let blob =
 new Blob(
 ["\ufeff"+texto],
 {
@@ -3171,31 +2697,38 @@ type:"text/csv;charset=utf-8"
 );
 
 
-let url=
+let url =
 URL.createObjectURL(blob);
 
-let a=
+let a =
 document.createElement("a");
 
 a.href=url;
-a.download="vendas-caixa-pro.csv";
+
+a.download=
+"vendas-caixa-pro.csv";
 
 document.body.appendChild(a);
 
 a.click();
 
-a.remove();
+document.body.removeChild(a);
 
 setTimeout(
 ()=>URL.revokeObjectURL(url),
 1000
 );
 
+
+alert(
+"Arquivo de vendas preparado."
+);
+
 }
 
 
 /* =====================================================
-   SALVAR INICIALMENTE
+   SALVAR DADOS
 ===================================================== */
 
 salvar();
