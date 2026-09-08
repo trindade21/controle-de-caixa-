@@ -2,328 +2,3205 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Caixa Pro">
 <title>Caixa Pro</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:80px}
-header{background:#111827;color:white;padding:25px 16px 14px;position:sticky;top:0;z-index:5}header h1{margin:0;font-size:21px}
-main{max-width:700px;margin:auto;padding:14px}.card{background:white;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px #0001}
-input,select,button{width:100%;padding:12px;border-radius:11px;border:1px solid #d1d5db;font-size:16px;background:white;margin:4px 0}
-button{background:#111827;color:white;border:0;font-weight:bold}.danger{background:#dc2626}.gray{background:#e5e7eb;color:#111827}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.valor{font-size:23px;font-weight:bold}.muted{color:#6b7280}
-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #ddd;padding:8px;display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
-nav button{background:white;color:#374151;font-size:11px;margin:0;padding:7px 2px}
-.item{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #eee}
-.hidden{display:none}.center{text-align:center}
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:#f3f4f6;
+color:#111827;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+padding-bottom:90px;
+-webkit-tap-highlight-color:transparent
+}
+
+header{
+background:#111827;
+color:white;
+padding:25px 16px 15px;
+position:sticky;
+top:0;
+z-index:5
+}
+
+header h1{margin:0;font-size:21px}
+header small{opacity:.8}
+
+main{
+max-width:720px;
+margin:auto;
+padding:14px
+}
+
+.card{
+background:white;
+border-radius:16px;
+padding:16px;
+margin-bottom:12px;
+box-shadow:0 2px 8px #0001
+}
+
+h2,h3{margin-top:0}
+
+input,select,button{
+width:100%;
+padding:13px;
+border-radius:11px;
+border:1px solid #d1d5db;
+font-size:16px;
+background:white;
+margin:5px 0;
+font-family:inherit
+}
+
+button{
+background:#111827;
+color:white;
+border:0;
+font-weight:bold;
+cursor:pointer
+}
+
+button:active{opacity:.75}
+
+.danger{background:#dc2626}
+.green{background:#16a34a}
+.blue{background:#2563eb}
+.gray{background:#e5e7eb;color:#111827}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.valor{
+font-size:24px;
+font-weight:bold
+}
+
+.big{
+font-size:30px;
+font-weight:bold
+}
+
+.muted{color:#6b7280}
+.center{text-align:center}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid #eee
+}
+
+.item:last-child{border-bottom:0}
+
+.item button{
+width:auto;
+padding:8px 10px;
+font-size:13px
+}
+
+.badge{
+display:inline-block;
+padding:4px 8px;
+border-radius:8px;
+font-size:12px;
+font-weight:bold
+}
+
+.badge-green{
+background:#dcfce7;
+color:#166534
+}
+
+.badge-red{
+background:#fee2e2;
+color:#991b1b
+}
+
+.badge-yellow{
+background:#fef3c7;
+color:#92400e
+}
+
+.hidden{display:none}
+
+hr{
+border:0;
+border-top:1px solid #eee;
+margin:16px 0
+}
+
+nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+border-top:1px solid #ddd;
+padding:8px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+z-index:10
+}
+
+nav button{
+background:white;
+color:#374151;
+font-size:11px;
+margin:0;
+padding:7px 2px
+}
+
+.notice{
+padding:12px;
+border-radius:10px;
+background:#fef3c7;
+color:#92400e;
+margin:8px 0
+}
+
+.success{
+padding:12px;
+border-radius:10px;
+background:#dcfce7;
+color:#166534;
+margin:8px 0
+}
+
+.stat{
+background:#f9fafb;
+border-radius:12px;
+padding:12px
+}
+
+@media(max-width:420px){
+.grid{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
 
+<!-- ================= LOGIN ================= -->
+
 <div id="login" style="padding:35px 18px">
+
 <div class="card">
+
 <h1 class="center">🧾 Caixa Pro</h1>
-<p class="center muted">Controle de Caixa</p>
-<input id="usuario" placeholder="Usuário">
-<input id="senha" type="password" placeholder="Senha">
-<button onclick="entrar()">Entrar</button>
-<p class="center muted">Primeiro acesso: admin / 1234</p>
-</div>
+
+<p class="center muted">
+Controle completo de caixa
+</p>
+
+<input
+id="usuario"
+placeholder="Usuário"
+autocomplete="username">
+
+<input
+id="senha"
+type="password"
+placeholder="Senha"
+autocomplete="current-password">
+
+<button onclick="entrar()">
+Entrar
+</button>
+
+<p class="center muted">
+Primeiro acesso: <b>admin</b> / <b>1234</b>
+</p>
+
 </div>
 
+</div>
+
+
+<!-- ================= APLICATIVO ================= -->
+
 <div id="app" class="hidden">
+
 <header>
+
 <h1>🧾 Caixa Pro</h1>
+
 <div id="operador"></div>
+
+<small id="statusHeader"></small>
+
 </header>
 
 <main id="tela"></main>
 
 <nav>
-<button onclick="pagina('inicio')">🏠<br>Início</button>
-<button onclick="pagina('venda')">🛒<br>Venda</button>
-<button onclick="pagina('produtos')">📦<br>Produtos</button>
-<button onclick="pagina('clientes')">👥<br>Clientes</button>
-<button onclick="pagina('caixa')">💰<br>Caixa</button>
+
+<button onclick="pagina('inicio')">
+🏠<br>Início
+</button>
+
+<button onclick="pagina('venda')">
+🛒<br>Venda
+</button>
+
+<button onclick="pagina('produtos')">
+📦<br>Produtos
+</button>
+
+<button onclick="pagina('clientes')">
+👥<br>Clientes
+</button>
+
+<button onclick="pagina('caixa')">
+💰<br>Caixa
+</button>
+
 </nav>
+
 </div>
+
 
 <script>
-let banco=JSON.parse(localStorage.getItem("CAIXA_PRO")||"null")||{
-produtos:[],clientes:[],vendas:[],movimentos:[],caixa:null
+
+/* =====================================================
+   BANCO DE DADOS
+===================================================== */
+
+let banco =
+JSON.parse(
+localStorage.getItem("CAIXA_PRO") || "null"
+) || {
+
+produtos:[],
+clientes:[],
+vendas:[],
+movimentos:[],
+fechamentos:[],
+caixa:null
+
 };
+
+
+/* =====================================================
+   CORREÇÃO DE DADOS ANTIGOS
+===================================================== */
+
+if(!banco.produtos) banco.produtos=[];
+if(!banco.clientes) banco.clientes=[];
+if(!banco.vendas) banco.vendas=[];
+if(!banco.movimentos) banco.movimentos=[];
+if(!banco.fechamentos) banco.fechamentos=[];
+
+
+/* =====================================================
+   OPERADORES
+===================================================== */
+
+let operadores =
+JSON.parse(
+localStorage.getItem("CAIXA_OPERADORES") || "null"
+) || [
+
+{
+nome:"Administrador",
+usuario:"admin",
+senha:"1234",
+admin:true
+}
+
+];
+
+
+/* =====================================================
+   GARANTE ADMIN
+===================================================== */
+
+if(
+!operadores.some(
+o=>o.usuario==="admin"
+)
+){
+
+operadores.unshift({
+
+nome:"Administrador",
+usuario:"admin",
+senha:"1234",
+admin:true
+
+});
+
+}
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
 let usuarioAtual="";
+let operadorAtual=null;
 let carrinho=[];
 
+
+/* =====================================================
+   SALVAR
+===================================================== */
+
 function salvar(){
-localStorage.setItem("CAIXA_PRO",JSON.stringify(banco));
+
+localStorage.setItem(
+"CAIXA_PRO",
+JSON.stringify(banco)
+);
+
+localStorage.setItem(
+"CAIXA_OPERADORES",
+JSON.stringify(operadores)
+);
+
 }
 
-function dinheiro(v){
-return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(v||0);
+
+/* =====================================================
+   DINHEIRO
+===================================================== */
+
+function dinheiro(valor){
+
+return new Intl.NumberFormat(
+"pt-BR",
+{
+style:"currency",
+currency:"BRL"
 }
+).format(Number(valor)||0);
+
+}
+
+
+/* =====================================================
+   ESCAPAR TEXTO
+===================================================== */
+
+function esc(txt){
+
+return String(txt??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
 
 function entrar(){
-if(usuario.value==="admin"&&senha.value==="1234"){
-usuarioAtual="Administrador";
-login.classList.add("hidden");
-app.classList.remove("hidden");
-operador.innerText="Operador: "+usuarioAtual;
-pagina("inicio");
-}else alert("Usuário ou senha incorretos.");
+
+let u=
+document.getElementById("usuario")
+.value
+.trim();
+
+let s=
+document.getElementById("senha")
+.value;
+
+let op=
+operadores.find(
+x=>x.usuario===u && x.senha===s
+);
+
+if(!op){
+
+alert("Usuário ou senha incorretos.");
+
+return;
+
 }
+
+usuarioAtual=op.nome;
+operadorAtual=op;
+
+document
+.getElementById("login")
+.classList.add("hidden");
+
+document
+.getElementById("app")
+.classList.remove("hidden");
+
+document
+.getElementById("operador")
+.innerText=
+"Operador: "+usuarioAtual;
+
+atualizarStatus();
+
+pagina("inicio");
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function atualizarStatus(){
+
+let status=
+document.getElementById("statusHeader");
+
+if(!status)return;
+
+status.innerText=
+banco.caixa
+?
+"🟢 Caixa aberto"
+:
+"🔴 Caixa fechado";
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
 
 function pagina(p){
-if(p==="inicio")inicio();
-if(p==="venda")venda();
-if(p==="produtos")produtos();
-if(p==="clientes")clientes();
-if(p==="caixa")caixa();
+
+atualizarStatus();
+
+if(p==="inicio") inicio();
+if(p==="venda") venda();
+if(p==="produtos") produtos();
+if(p==="clientes") clientes();
+if(p==="caixa") caixa();
+
 }
+
+
+/* =====================================================
+   INÍCIO
+===================================================== */
 
 function inicio(){
-let total=banco.vendas.filter(v=>!v.cancelada).reduce((a,v)=>a+v.total,0);
+
+let ativas=
+banco.vendas.filter(
+v=>!v.cancelada
+);
+
+let faturamento=
+ativas.reduce(
+(a,v)=>a+Number(v.total),
+0
+);
+
+let dinheiroVendas=
+ativas
+.filter(v=>v.pagamento==="Dinheiro")
+.reduce(
+(a,v)=>a+Number(v.total),
+0
+);
+
+let pix=
+ativas
+.filter(v=>v.pagamento==="Pix")
+.reduce(
+(a,v)=>a+Number(v.total),
+0
+);
+
+let cartao=
+ativas
+.filter(v=>
+v.pagamento==="Cartão de débito" ||
+v.pagamento==="Cartão de crédito"
+)
+.reduce(
+(a,v)=>a+Number(v.total),
+0
+);
+
+
 tela.innerHTML=`
+
 <div class="card">
-<h2>Resumo</h2>
+
+<h2>📊 Resumo</h2>
+
 <div class="grid">
-<div><span class="muted">Vendas</span><div class="valor">${dinheiro(total)}</div></div>
-<div><span class="muted">Produtos</span><div class="valor">${banco.produtos.length}</div></div>
+
+<div class="stat">
+
+<span class="muted">
+Vendas
+</span>
+
+<div class="valor">
+${ativas.length}
 </div>
+
 </div>
+
+<div class="stat">
+
+<span class="muted">
+Faturamento
+</span>
+
+<div class="valor">
+${dinheiro(faturamento)}
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
 <div class="card">
-<h3>Status do caixa</h3>
-<h2>${banco.caixa?"🟢 ABERTO":"🔴 FECHADO"}</h2>
-<button onclick="pagina('venda')">Nova venda</button>
+
+<h3>💰 Status do Caixa</h3>
+
+<h2>
+${banco.caixa
+?"🟢 ABERTO"
+:"🔴 FECHADO"}
+</h2>
+
+${
+banco.caixa
+?
+`
+<p>
+Troco inicial:
+<b>${dinheiro(banco.caixa.inicial)}</b>
+</p>
+
+<button
+class="blue"
+onclick="pagina('venda')">
+
+🛒 Nova venda
+
+</button>
+`
+:
+`
+<div class="notice">
+Abra o caixa antes de realizar vendas.
 </div>
-<div class="card">
-<h3>Últimas vendas</h3>
-${banco.vendas.slice(-5).reverse().map(v=>`
-<div class="item"><span>${v.pagamento}</span><b>${dinheiro(v.total)}</b></div>
-`).join("")||"<p class='muted'>Nenhuma venda.</p>"}
-</div>`;
+
+<button
+class="green"
+onclick="pagina('caixa')">
+
+🔓 Abrir caixa
+
+</button>
+`
 }
 
-function venda(){
-let total=carrinho.reduce((a,x)=>a+x.preco*x.qtd,0);
-tela.innerHTML=`
-<div class="card">
-<h2>🛒 Nova Venda</h2>
-<input id="busca" placeholder="Nome ou código do produto">
-<div class="grid">
-<input id="quantidade" type="number" value="1" min="1">
-<button onclick="adicionar()">Adicionar</button>
 </div>
-</div>
+
+
 <div class="card">
-<h3>Carrinho</h3>
-${carrinho.map((x,i)=>`
+
+<h3>💳 Vendas por pagamento</h3>
+
 <div class="item">
-<span>${x.nome} × ${x.qtd}</span>
-<b>${dinheiro(x.preco*x.qtd)}
-<button style="width:auto;padding:5px" onclick="remover(${i})">×</button>
+<span>Dinheiro</span>
+<b>${dinheiro(dinheiroVendas)}</b>
+</div>
+
+<div class="item">
+<span>Pix</span>
+<b>${dinheiro(pix)}</b>
+</div>
+
+<div class="item">
+<span>Cartões</span>
+<b>${dinheiro(cartao)}</b>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🧾 Últimas vendas</h3>
+
+${
+banco.vendas
+.slice(-10)
+.reverse()
+.map(v=>`
+
+<div class="item">
+
+<span>
+
+<b>
+${esc(v.pagamento)}
 </b>
-</div>`).join("")||"<p class='muted'>Carrinho vazio.</p>"}
+
+<br>
+
+<small>
+${new Date(v.data)
+.toLocaleString("pt-BR")}
+</small>
+
+<br>
+
+${
+v.cancelada
+?
+`<span class="badge badge-red">
+CANCELADA
+</span>`
+:
+`<span class="badge badge-green">
+ATIVA
+</span>`
+}
+
+</span>
+
+<span style="text-align:right">
+
+<b>
+${dinheiro(v.total)}
+</b>
+
+<br>
+
+${
+!v.cancelada
+?
+`
+<button
+class="danger"
+onclick="cancelarVenda(${v.id})">
+
+Cancelar
+
+</button>
+`
+:
+""
+}
+
+</span>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Nenhuma venda.</p>"
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   VENDA
+===================================================== */
+
+function venda(){
+
+let total=
+carrinho.reduce(
+(a,x)=>a+
+(Number(x.preco)*Number(x.qtd)),
+0
+);
+
+tela.innerHTML=`
+
+<div class="card">
+
+<h2>🛒 Nova Venda</h2>
+
+${
+!banco.caixa
+?
+`
+<div class="notice">
+O caixa está fechado.
+</div>
+
+<button
+class="green"
+onclick="pagina('caixa')">
+
+Abrir caixa
+
+</button>
+`
+:
+""
+}
+
+<input
+id="busca"
+placeholder="Nome ou código do produto"
+autocomplete="off">
+
+<div class="grid">
+
+<input
+id="quantidade"
+type="number"
+value="1"
+min="1">
+
+<button
+onclick="adicionar()">
+
+Adicionar
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🛍️ Carrinho</h3>
+
+${
+carrinho.map((x,i)=>`
+
+<div class="item">
+
+<span>
+
+<b>${esc(x.nome)}</b>
+
+<br>
+
+<small>
+${x.qtd} × ${dinheiro(x.preco)}
+</small>
+
+</span>
+
+<span style="text-align:right">
+
+<b>
+${dinheiro(x.preco*x.qtd)}
+</b>
+
+<br>
+
+<button
+class="danger"
+onclick="remover(${i})">
+
+Remover
+
+</button>
+
+</span>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Carrinho vazio.</p>"
+}
+
 <hr>
-<h2>TOTAL: ${dinheiro(total)}</h2>
-<select id="pagamento">
+
+<div class="big">
+TOTAL: ${dinheiro(total)}
+</div>
+
+<br>
+
+<label>
+<strong>Forma de pagamento</strong>
+</label>
+
+<select id="pagamento"
+onchange="atualizarPagamento()">
+
 <option>Dinheiro</option>
 <option>Pix</option>
 <option>Cartão de débito</option>
 <option>Cartão de crédito</option>
 <option>Fiado</option>
+
 </select>
-<input id="recebido" type="number" step="0.01" placeholder="Valor recebido (dinheiro)">
-<button onclick="finalizar()">Finalizar venda</button>
-</div>`;
+
+<div id="areaDinheiro">
+
+<input
+id="recebido"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Valor recebido">
+
+<button
+class="blue"
+onclick="calcularTroco()">
+
+💵 Calcular troco
+
+</button>
+
+<div
+id="trocoVenda"
+class="valor"
+style="margin:12px 0">
+
+Troco: R$ 0,00
+
+</div>
+
+</div>
+
+<button
+class="green"
+onclick="finalizar()">
+
+✅ Finalizar venda
+
+</button>
+
+</div>
+
+`;
+
+
+atualizarPagamento();
+
 }
+
+
+/* =====================================================
+   ATUALIZA PAGAMENTO
+===================================================== */
+
+function atualizarPagamento(){
+
+let pagamento=
+document.getElementById("pagamento");
+
+let area=
+document.getElementById("areaDinheiro");
+
+if(!pagamento||!area)return;
+
+area.style.display=
+pagamento.value==="Dinheiro"
+?
+"block"
+:
+"none";
+
+}
+
+
+/* =====================================================
+   TROCO
+===================================================== */
+
+function calcularTroco(){
+
+let total=
+carrinho.reduce(
+(a,x)=>a+x.preco*x.qtd,
+0
+);
+
+let recebido=
+parseFloat(
+document.getElementById("recebido").value
+)||0;
+
+let troco=
+recebido-total;
+
+let campo=
+document.getElementById("trocoVenda");
+
+if(troco<0){
+
+campo.innerText=
+"Falta: "+dinheiro(Math.abs(troco));
+
+return;
+
+}
+
+campo.innerText=
+"Troco: "+dinheiro(troco);
+
+}
+
+
+/* =====================================================
+   ADICIONAR PRODUTO
+===================================================== */
 
 function adicionar(){
-let texto=busca.value.trim().toLowerCase();
-let qtd=Math.max(1,parseInt(quantidade.value)||1);
-let p=banco.produtos.find(x=>x.nome.toLowerCase()===texto||x.codigo===texto);
-if(!p)return alert("Produto não encontrado.");
-if(p.estoque<qtd)return alert("Estoque insuficiente.");
-let existente=carrinho.find(x=>x.id===p.id);
-if(existente)existente.qtd+=qtd;
-else carrinho.push({id:p.id,nome:p.nome,preco:p.preco,qtd});
-venda();
+
+if(!banco.caixa){
+
+alert("Abra o caixa antes de vender.");
+
+return;
+
 }
+
+let texto=
+document
+.getElementById("busca")
+.value
+.trim()
+.toLowerCase();
+
+let qtd=
+Math.max(
+1,
+parseInt(
+document
+.getElementById("quantidade")
+.value
+)||1
+);
+
+if(!texto){
+
+alert("Informe o produto.");
+
+return;
+
+}
+
+let p=
+banco.produtos.find(
+x=>
+x.nome.toLowerCase()===texto
+||
+String(x.codigo||"").toLowerCase()===texto
+);
+
+if(!p){
+
+alert("Produto não encontrado.");
+
+return;
+
+}
+
+if(Number(p.estoque)<qtd){
+
+alert(
+"Estoque insuficiente.\n\n"+
+"Disponível: "+p.estoque
+);
+
+return;
+
+}
+
+let existente=
+carrinho.find(
+x=>x.id===p.id
+);
+
+if(existente){
+
+if(
+existente.qtd+qtd>
+Number(p.estoque)
+){
+
+alert(
+"Quantidade maior que o estoque."
+);
+
+return;
+
+}
+
+existente.qtd+=qtd;
+
+}
+else{
+
+carrinho.push({
+
+id:p.id,
+nome:p.nome,
+preco:Number(p.preco),
+qtd:qtd
+
+});
+
+}
+
+venda();
+
+}
+
+
+/* =====================================================
+   REMOVER ITEM DO CARRINHO
+===================================================== */
 
 function remover(i){
+
 carrinho.splice(i,1);
+
 venda();
+
 }
+
+
+/* =====================================================
+   FINALIZAR VENDA
+===================================================== */
 
 function finalizar(){
-if(!banco.caixa)return alert("Abra o caixa antes de vender.");
-if(!carrinho.length)return alert("Carrinho vazio.");
 
-let total=carrinho.reduce((a,x)=>a+x.preco*x.qtd,0);
-let pag=pagamento.value;
-let rec=pag==="Dinheiro"?parseFloat(recebido.value||0):total;
+if(!banco.caixa){
 
-if(pag==="Dinheiro"&&rec<total)
-return alert("Valor recebido menor que o total.");
+alert(
+"Abra o caixa antes de vender."
+);
+
+return;
+
+}
+
+if(!carrinho.length){
+
+alert("Carrinho vazio.");
+
+return;
+
+}
+
+let total=
+carrinho.reduce(
+(a,x)=>a+x.preco*x.qtd,
+0
+);
+
+let pag=
+document
+.getElementById("pagamento")
+.value;
+
+let rec=
+total;
+
+let troco=0;
+
+if(pag==="Dinheiro"){
+
+rec=
+parseFloat(
+document
+.getElementById("recebido")
+.value
+)||0;
+
+if(rec<total){
+
+alert(
+"Valor recebido menor que o total."
+);
+
+return;
+
+}
+
+troco=rec-total;
+
+}
+
+
+let cliente="";
 
 if(pag==="Fiado"){
-let nome=prompt("Nome do cliente:");
-if(!nome)return;
+
+cliente=
+prompt("Nome do cliente:");
+
+if(!cliente)return;
+
 }
 
-carrinho.forEach(x=>{
-let p=banco.produtos.find(p=>p.id===x.id);
-p.estoque-=x.qtd;
+
+/* Confere estoque novamente */
+
+for(let item of carrinho){
+
+let p=
+banco.produtos.find(
+x=>x.id===item.id
+);
+
+if(!p||p.estoque<item.qtd){
+
+alert(
+"O estoque mudou.\n"+
+"Confira os produtos."
+);
+
+return;
+
+}
+
+}
+
+
+/* Itens */
+
+let itens=
+carrinho.map(x=>({
+
+id:x.id,
+nome:x.nome,
+preco:x.preco,
+qtd:x.qtd
+
+}));
+
+
+/* Baixa estoque */
+
+carrinho.forEach(item=>{
+
+let p=
+banco.produtos.find(
+x=>x.id===item.id
+);
+
+p.estoque-=item.qtd;
+
 });
 
-let venda={
-data:new Date().toISOString(),
-operador:usuarioAtual,
-total:total,
-pagamento:pag,
-recebido:rec,
-troco:pag==="Dinheiro"?rec-total:0,
+
+/* Venda */
+
+let novaVenda={
+
+id:Date.now(),
+
+data:
+new Date().toISOString(),
+
+operador:
+usuarioAtual,
+
+caixaId:
+banco.caixa.id,
+
+total:
+total,
+
+pagamento:
+pag,
+
+recebido:
+rec,
+
+troco:
+troco,
+
+cliente:
+cliente,
+
+itens:
+itens,
+
 cancelada:false
+
 };
 
-banco.vendas.push(venda);
+
+banco.vendas.push(
+novaVenda
+);
+
 salvar();
 
-alert("Venda realizada!\nTroco: "+dinheiro(venda.troco));
+
+alert(
+"✅ VENDA REALIZADA\n\n"+
+"Total: "+dinheiro(total)+
+"\nRecebido: "+dinheiro(rec)+
+"\nTroco: "+dinheiro(troco)
+);
+
+
 carrinho=[];
+
 pagina("venda");
+
 }
+
+
+/* =====================================================
+   CANCELAR VENDA
+===================================================== */
+
+function cancelarVenda(id){
+
+let v=
+banco.vendas.find(
+x=>x.id===id
+);
+
+if(!v){
+
+alert("Venda não encontrada.");
+
+return;
+
+}
+
+if(v.cancelada){
+
+alert("Essa venda já está cancelada.");
+
+return;
+
+}
+
+
+let motivo=
+prompt(
+"Informe o motivo do cancelamento:"
+);
+
+if(motivo===null)return;
+
+motivo=motivo.trim();
+
+if(!motivo){
+
+alert(
+"É necessário informar o motivo."
+);
+
+return;
+
+}
+
+
+let confirma=
+confirm(
+"⚠️ CONFIRMAR CANCELAMENTO?\n\n"+
+"Total: "+dinheiro(v.total)+
+"\nPagamento: "+v.pagamento+
+"\n\nMotivo: "+motivo
+);
+
+if(!confirma)return;
+
+
+/* Devolve estoque */
+
+if(v.itens){
+
+v.itens.forEach(item=>{
+
+let p=
+banco.produtos.find(
+x=>x.id===item.id
+);
+
+if(p){
+
+p.estoque=
+Number(p.estoque)+
+Number(item.qtd);
+
+}
+
+});
+
+}
+
+
+/* Marca cancelada */
+
+v.cancelada=true;
+
+v.motivoCancelamento=
+motivo;
+
+v.canceladaEm=
+new Date().toISOString();
+
+v.canceladaPor=
+usuarioAtual;
+
+
+salvar();
+
+
+alert(
+"❌ Venda cancelada.\n\n"+
+"Os produtos foram devolvidos ao estoque."
+);
+
+inicio();
+
+}
+
+
+/* =====================================================
+   PRODUTOS
+===================================================== */
 
 function produtos(){
+
 tela.innerHTML=`
+
 <div class="card">
+
 <h2>📦 Produtos</h2>
-<input id="pnome" placeholder="Nome do produto">
-<input id="pcodigo" placeholder="Código de barras">
-<input id="ppreco" type="number" step="0.01" placeholder="Preço de venda">
-<input id="pestoque" type="number" placeholder="Estoque">
-<button onclick="cadastrarProduto()">Cadastrar produto</button>
+
+<input
+id="pnome"
+placeholder="Nome do produto">
+
+<input
+id="pcodigo"
+placeholder="Código de barras">
+
+<input
+id="ppreco"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Preço de venda">
+
+<input
+id="pestoque"
+type="number"
+inputmode="numeric"
+placeholder="Estoque">
+
+<button
+class="green"
+onclick="cadastrarProduto()">
+
+➕ Cadastrar produto
+
+</button>
+
 </div>
+
+
 <div class="card">
-${banco.produtos.map((p,i)=>`
+
+<h3>
+Produtos cadastrados:
+${banco.produtos.length}
+</h3>
+
+${
+banco.produtos
+.map(p=>`
+
 <div class="item">
-<span><b>${p.nome}</b><br>
-<small>Código: ${p.codigo||"-"} | Estoque: ${p.estoque}</small></span>
-<b>${dinheiro(p.preco)}</b>
-</div>`).join("")||"<p class='muted'>Nenhum produto cadastrado.</p>"}
-</div>`;
+
+<span>
+
+<b>
+${esc(p.nome)}
+</b>
+
+<br>
+
+<small>
+Código: ${esc(p.codigo||"-")}
+<br>
+Estoque: ${p.estoque}
+</small>
+
+</span>
+
+<span style="text-align:right">
+
+<b>
+${dinheiro(p.preco)}
+</b>
+
+<br>
+
+<button
+onclick="editarProduto(${p.id})">
+
+Editar
+
+</button>
+
+<button
+class="danger"
+onclick="removerProduto(${p.id})">
+
+Excluir
+
+</button>
+
+</span>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Nenhum produto cadastrado.</p>"
 }
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   CADASTRAR PRODUTO
+===================================================== */
 
 function cadastrarProduto(){
-if(!pnome.value||!ppreco.value)return alert("Informe nome e preço.");
-banco.produtos.push({
-id:Date.now(),
-nome:pnome.value,
-codigo:pcodigo.value,
-preco:parseFloat(ppreco.value),
-estoque:parseInt(pestoque.value)||0
-});
-salvar();
-produtos();
+
+let nome=
+document
+.getElementById("pnome")
+.value
+.trim();
+
+let codigo=
+document
+.getElementById("pcodigo")
+.value
+.trim();
+
+let preco=
+parseFloat(
+document
+.getElementById("ppreco")
+.value
+);
+
+let estoque=
+parseInt(
+document
+.getElementById("pestoque")
+.value
+)||0;
+
+
+if(!nome){
+
+alert("Informe o nome.");
+
+return;
+
 }
+
+if(!(preco>0)){
+
+alert("Informe um preço válido.");
+
+return;
+
+}
+
+if(estoque<0){
+
+alert("Estoque inválido.");
+
+return;
+
+}
+
+
+/* Evita código duplicado */
+
+if(
+codigo &&
+banco.produtos.some(
+p=>String(p.codigo)===codigo
+)
+){
+
+alert(
+"Já existe um produto com esse código."
+);
+
+return;
+
+}
+
+
+banco.produtos.push({
+
+id:Date.now(),
+
+nome:nome,
+
+codigo:codigo,
+
+preco:preco,
+
+estoque:estoque
+
+});
+
+
+salvar();
+
+alert(
+"Produto cadastrado com sucesso."
+);
+
+produtos();
+
+}
+
+
+/* =====================================================
+   EDITAR PRODUTO
+===================================================== */
+
+function editarProduto(id){
+
+let p=
+banco.produtos.find(
+x=>x.id===id
+);
+
+if(!p)return;
+
+
+let nome=
+prompt(
+"Nome do produto:",
+p.nome
+);
+
+if(nome===null)return;
+
+
+let codigo=
+prompt(
+"Código de barras:",
+p.codigo||""
+);
+
+if(codigo===null)return;
+
+
+let preco=
+parseFloat(
+prompt(
+"Preço de venda:",
+p.preco
+)
+);
+
+if(!(preco>0)){
+
+alert("Preço inválido.");
+
+return;
+
+}
+
+
+let estoque=
+parseInt(
+prompt(
+"Estoque:",
+p.estoque
+)
+);
+
+if(isNaN(estoque)||estoque<0){
+
+alert("Estoque inválido.");
+
+return;
+
+}
+
+
+p.nome=nome.trim();
+p.codigo=codigo.trim();
+p.preco=preco;
+p.estoque=estoque;
+
+
+salvar();
+
+produtos();
+
+}
+
+
+/* =====================================================
+   EXCLUIR PRODUTO
+===================================================== */
+
+function removerProduto(id){
+
+let p=
+banco.produtos.find(
+x=>x.id===id
+);
+
+if(!p)return;
+
+
+let usado=
+banco.vendas.some(
+v=>
+v.itens &&
+v.itens.some(
+i=>i.id===id
+)
+);
+
+
+if(usado){
+
+let confirmar=
+confirm(
+"Esse produto aparece em vendas anteriores.\n\n"+
+"Excluir mesmo assim?"
+);
+
+if(!confirmar)return;
+
+}
+else{
+
+if(
+!confirm(
+"Excluir o produto '"+p.nome+"'?"
+)
+)return;
+
+}
+
+
+banco.produtos=
+banco.produtos.filter(
+x=>x.id!==id
+);
+
+
+salvar();
+
+produtos();
+
+}
+
+
+/* =====================================================
+   CLIENTES
+===================================================== */
 
 function clientes(){
+
 tela.innerHTML=`
+
 <div class="card">
+
 <h2>👥 Clientes</h2>
-<input id="cnome" placeholder="Nome">
-<input id="ctelefone" placeholder="Telefone">
-<button onclick="cadastrarCliente()">Cadastrar cliente</button>
+
+<input
+id="cnome"
+placeholder="Nome">
+
+<input
+id="ctelefone"
+placeholder="Telefone"
+inputmode="tel">
+
+<button
+class="green"
+onclick="cadastrarCliente()">
+
+➕ Cadastrar cliente
+
+</button>
+
 </div>
+
+
 <div class="card">
-${banco.clientes.map(c=>`
-<div class="item"><span>${c.nome}<br><small>${c.telefone}</small></span></div>
-`).join("")||"<p class='muted'>Nenhum cliente.</p>"}
-</div>`;
+
+<h3>
+Clientes cadastrados:
+${banco.clientes.length}
+</h3>
+
+${
+banco.clientes
+.map((c,i)=>`
+
+<div class="item">
+
+<span>
+
+<b>
+${esc(c.nome)}
+</b>
+
+<br>
+
+<small>
+${esc(c.telefone||"")}
+</small>
+
+</span>
+
+<button
+class="danger"
+onclick="removerCliente(${i})">
+
+Excluir
+
+</button>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Nenhum cliente.</p>"
 }
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   CADASTRAR CLIENTE
+===================================================== */
 
 function cadastrarCliente(){
-if(!cnome.value)return;
-banco.clientes.push({nome:cnome.value,telefone:ctelefone.value});
-salvar();
-clientes();
+
+let nome=
+document
+.getElementById("cnome")
+.value
+.trim();
+
+let telefone=
+document
+.getElementById("ctelefone")
+.value
+.trim();
+
+if(!nome){
+
+alert("Informe o nome.");
+
+return;
+
 }
+
+banco.clientes.push({
+
+id:Date.now(),
+
+nome:nome,
+
+telefone:telefone
+
+});
+
+salvar();
+
+clientes();
+
+}
+
+
+/* =====================================================
+   REMOVER CLIENTE
+===================================================== */
+
+function removerCliente(i){
+
+if(
+!confirm("Excluir este cliente?")
+)return;
+
+banco.clientes.splice(i,1);
+
+salvar();
+
+clientes();
+
+}
+
+
+/* =====================================================
+   CALCULAR SALDO DO CAIXA
+===================================================== */
+
+function calcularSaldoCaixa(){
+
+if(!banco.caixa)return 0;
+
+let saldo=
+Number(banco.caixa.inicial)||0;
+
+
+/* Vendas em dinheiro */
+
+banco.vendas
+.filter(v=>
+!v.cancelada &&
+v.pagamento==="Dinheiro" &&
+v.caixaId===banco.caixa.id
+)
+.forEach(v=>{
+
+/*
+No caixa entra o valor efetivamente recebido.
+*/
+
+saldo+=
+Number(v.recebido)||0;
+
+});
+
+
+/* Entradas e saídas */
+
+banco.movimentos
+.filter(
+m=>m.caixaId===banco.caixa.id
+)
+.forEach(m=>{
+
+if(m.tipo==="Entrada"){
+
+saldo+=Number(m.valor)||0;
+
+}
+else{
+
+saldo-=Number(m.valor)||0;
+
+}
+
+});
+
+
+/*
+Quando uma venda em dinheiro é cancelada,
+o valor recebido precisa sair novamente do caixa.
+*/
+
+banco.vendas
+.filter(v=>
+v.cancelada &&
+v.pagamento==="Dinheiro" &&
+v.caixaId===banco.caixa.id
+)
+.forEach(v=>{
+
+saldo-=
+Number(v.recebido)||0;
+
+});
+
+
+return saldo;
+
+}
+
+
+/* =====================================================
+   RESUMO DE VENDAS DO CAIXA
+===================================================== */
+
+function resumoCaixa(){
+
+if(!banco.caixa){
+
+return {
+
+quantidade:0,
+total:0,
+dinheiro:0,
+pix:0,
+debito:0,
+credito:0,
+fiado:0
+
+};
+
+}
+
+let lista=
+banco.vendas.filter(
+v=>
+!v.cancelada &&
+v.caixaId===banco.caixa.id
+);
+
+
+let resultado={
+
+quantidade:lista.length,
+total:0,
+dinheiro:0,
+pix:0,
+debito:0,
+credito:0,
+fiado:0
+
+};
+
+
+lista.forEach(v=>{
+
+resultado.total+=Number(v.total)||0;
+
+if(v.pagamento==="Dinheiro")
+resultado.dinheiro+=Number(v.total)||0;
+
+if(v.pagamento==="Pix")
+resultado.pix+=Number(v.total)||0;
+
+if(v.pagamento==="Cartão de débito")
+resultado.debito+=Number(v.total)||0;
+
+if(v.pagamento==="Cartão de crédito")
+resultado.credito+=Number(v.total)||0;
+
+if(v.pagamento==="Fiado")
+resultado.fiado+=Number(v.total)||0;
+
+});
+
+
+return resultado;
+
+}
+
+
+/* =====================================================
+   CAIXA
+===================================================== */
 
 function caixa(){
-let saldo=banco.caixa?banco.caixa.inicial:0;
+
+atualizarStatus();
+
 
 if(banco.caixa){
-banco.vendas.filter(v=>!v.cancelada&&v.pagamento==="Dinheiro").forEach(v=>saldo+=v.total);
-banco.movimentos.forEach(m=>saldo+=m.tipo==="Entrada"?m.valor:-m.valor);
-}
+
+let saldo=
+calcularSaldoCaixa();
+
+let resumo=
+resumoCaixa();
+
 
 tela.innerHTML=`
+
 <div class="card">
+
 <h2>💰 Caixa</h2>
-${banco.caixa?`
-<h3>🟢 Caixa aberto</h3>
-<p>Saldo esperado:</p>
-<div class="valor">${dinheiro(saldo)}</div>
-<input id="contado" type="number" step="0.01" placeholder="Dinheiro contado">
-<button class="danger" onclick="fecharCaixa(${saldo})">Fechar caixa</button>
-`:`
-<h3>🔴 Caixa fechado</h3>
-<input id="inicial" type="number" step="0.01" placeholder="Valor inicial / troco">
-<button onclick="abrirCaixa()">Abrir caixa</button>
-`}
+
+<h3>
+🟢 CAIXA ABERTO
+</h3>
+
+<p>
+Operador:
+<b>
+${esc(banco.caixa.operador)}
+</b>
+</p>
+
+<p>
+Abertura:
+<br>
+${new Date(
+banco.caixa.abertura
+).toLocaleString("pt-BR")}
+</p>
+
+<hr>
+
+<p>
+<strong>
+💵 Troco inicial
+</strong>
+</p>
+
+<div class="valor">
+${dinheiro(banco.caixa.inicial)}
 </div>
 
-${banco.caixa?`
-<div class="card">
-<h3>Movimentação</h3>
-<button onclick="movimento('Entrada')">➕ Entrada</button>
-<button class="gray" onclick="movimento('Saída')">➖ Saída</button>
-</div>`:""}
+<p>
+<strong>
+💰 Saldo esperado
+</strong>
+</p>
+
+<div class="big">
+${dinheiro(saldo)}
+</div>
+
+<input
+id="contado"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Digite o dinheiro contado">
+
+<button
+class="danger"
+onclick="fecharCaixa()">
+
+🔒 Fechar caixa
+
+</button>
+
+</div>
+
 
 <div class="card">
-<h3>Relatório</h3>
-<p>Total de vendas: <b>${banco.vendas.length}</b></p>
-<button onclick="exportar()">Exportar vendas</button>
-</div>`;
+
+<h3>📊 Resumo deste caixa</h3>
+
+<div class="item">
+<span>Vendas</span>
+<b>${resumo.quantidade}</b>
+</div>
+
+<div class="item">
+<span>Total vendido</span>
+<b>${dinheiro(resumo.total)}</b>
+</div>
+
+<div class="item">
+<span>Dinheiro</span>
+<b>${dinheiro(resumo.dinheiro)}</b>
+</div>
+
+<div class="item">
+<span>Pix</span>
+<b>${dinheiro(resumo.pix)}</b>
+</div>
+
+<div class="item">
+<span>Débito</span>
+<b>${dinheiro(resumo.debito)}</b>
+</div>
+
+<div class="item">
+<span>Crédito</span>
+<b>${dinheiro(resumo.credito)}</b>
+</div>
+
+<div class="item">
+<span>Fiado</span>
+<b>${dinheiro(resumo.fiado)}</b>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>💵 Movimentação</h3>
+
+<button
+class="green"
+onclick="movimento('Entrada')">
+
+➕ Entrada de dinheiro
+
+</button>
+
+<button
+class="gray"
+onclick="movimento('Saída')">
+
+➖ Saída de dinheiro
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>👤 Operadores</h3>
+
+<button
+onclick="gerenciarOperadores()">
+
+Gerenciar operadores
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📋 Relatórios</h3>
+
+<button
+onclick="relatorioVendas()">
+
+📄 Ver vendas
+
+</button>
+
+<button
+onclick="relatorioMovimentos()">
+
+💵 Ver entradas e saídas
+
+</button>
+
+<button
+onclick="historicoCaixas()">
+
+🗂️ Histórico de caixas
+
+</button>
+
+<button
+onclick="exportar()">
+
+📥 Exportar vendas CSV
+
+</button>
+
+</div>
+
+`;
+
+return;
+
 }
+
+
+/* CAIXA FECHADO */
+
+tela.innerHTML=`
+
+<div class="card">
+
+<h2>💰 Caixa</h2>
+
+<h3>
+🔴 CAIXA FECHADO
+</h3>
+
+<p class="muted">
+
+Informe quanto dinheiro estará no caixa
+no início do expediente.
+
+</p>
+
+<input
+id="inicial"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Troco / valor inicial">
+
+<button
+class="green"
+onclick="abrirCaixa()">
+
+🔓 Abrir caixa
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>👤 Operadores</h3>
+
+<button
+onclick="gerenciarOperadores()">
+
+Gerenciar operadores
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📋 Relatórios</h3>
+
+<button
+onclick="relatorioVendas()">
+
+📄 Ver vendas
+
+</button>
+
+<button
+onclick="historicoCaixas()">
+
+🗂️ Histórico de caixas
+
+</button>
+
+<button
+onclick="exportar()">
+
+📥 Exportar vendas CSV
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   ABRIR CAIXA
+===================================================== */
 
 function abrirCaixa(){
-let v=parseFloat(inicial.value)||0;
-banco.caixa={inicial:v,abertura:new Date().toISOString()};
-salvar();
-caixa();
+
+if(banco.caixa){
+
+alert(
+"O caixa já está aberto."
+);
+
+return;
+
 }
 
-function fecharCaixa(saldo){
-let contado=parseFloat(document.getElementById("contado").value)||0;
-let diferenca=contado-saldo;
-banco.caixa=null;
-salvar();
-alert("Caixa fechado!\nDiferença: "+dinheiro(diferenca));
-caixa();
+let valor=
+parseFloat(
+document
+.getElementById("inicial")
+.value
+)||0;
+
+if(valor<0){
+
+alert(
+"O valor inicial não pode ser negativo."
+);
+
+return;
+
 }
+
+
+banco.caixa={
+
+id:Date.now(),
+
+inicial:valor,
+
+abertura:
+new Date().toISOString(),
+
+operador:
+usuarioAtual
+
+};
+
+
+salvar();
+
+atualizarStatus();
+
+
+alert(
+"✅ CAIXA ABERTO\n\n"+
+"Troco inicial: "+
+dinheiro(valor)
+);
+
+caixa();
+
+}
+
+
+/* =====================================================
+   FECHAR CAIXA
+===================================================== */
+
+function fecharCaixa(){
+
+if(!banco.caixa){
+
+alert("O caixa já está fechado.");
+
+return;
+
+}
+
+let esperado=
+calcularSaldoCaixa();
+
+let campo=
+document.getElementById("contado");
+
+let contado=
+parseFloat(campo.value);
+
+if(isNaN(contado)||contado<0){
+
+alert(
+"Informe o dinheiro contado no caixa."
+);
+
+return;
+
+}
+
+let diferenca=
+contado-esperado;
+
+
+let confirmar=
+confirm(
+"🔒 CONFIRMAR FECHAMENTO?\n\n"+
+"Esperado: "+dinheiro(esperado)+
+"\nContado: "+dinheiro(contado)+
+"\nDiferença: "+dinheiro(diferenca)
+);
+
+if(!confirmar)return;
+
+
+let fechamento={
+
+id:Date.now(),
+
+caixaId:
+banco.caixa.id,
+
+abertura:
+banco.caixa.abertura,
+
+fechamento:
+new Date().toISOString(),
+
+operadorAbertura:
+banco.caixa.operador,
+
+operadorFechamento:
+usuarioAtual,
+
+inicial:
+banco.caixa.inicial,
+
+esperado:
+esperado,
+
+contado:
+contado,
+
+diferenca:
+diferenca
+
+};
+
+
+banco.fechamentos.push(
+fechamento
+);
+
+banco.caixa=null;
+
+salvar();
+
+atualizarStatus();
+
+
+let texto=
+diferenca===0
+?
+"CAIXA FECHADO SEM DIFERENÇA."
+:
+diferenca>0
+?
+"CAIXA FECHADO COM SOBRA."
+:
+"CAIXA FECHADO COM FALTA.";
+
+
+alert(
+"🔒 "+texto+
+"\n\n"+
+"Esperado: "+dinheiro(esperado)+
+"\nContado: "+dinheiro(contado)+
+"\nDiferença: "+dinheiro(diferenca)
+);
+
+
+caixa();
+
+}
+
+
+/* =====================================================
+   ENTRADA / SAÍDA
+===================================================== */
 
 function movimento(tipo){
-let valor=parseFloat(prompt("Valor:"));
-if(!(valor>0))return;
-let descricao=prompt("Descrição:")||"";
-banco.movimentos.push({tipo,valor,descricao,data:new Date().toISOString()});
-salvar();
-caixa();
+
+if(!banco.caixa){
+
+alert(
+"Abra o caixa primeiro."
+);
+
+return;
+
 }
 
-function exportar(){
-let texto="Data;Pagamento;Total;Recebido;Troco\n";
-banco.vendas.forEach(v=>{
-texto+=`${v.data};${v.pagamento};${v.total};${v.recebido};${v.troco}\n`;
+
+let valor=
+parseFloat(
+prompt(
+"Valor da "+tipo+":"
+)
+);
+
+if(!(valor>0))return;
+
+
+let descricao=
+prompt(
+"Descrição da "+tipo+":"
+);
+
+
+if(descricao===null)return;
+
+
+banco.movimentos.push({
+
+id:Date.now(),
+
+caixaId:
+banco.caixa.id,
+
+tipo:tipo,
+
+valor:valor,
+
+descricao:
+descricao.trim(),
+
+operador:
+usuarioAtual,
+
+data:
+new Date().toISOString()
+
 });
-let a=document.createElement("a");
-a.href=URL.createObjectURL(new Blob([texto],{type:"text/csv"}));
-a.download="vendas.csv";
-a.click();
+
+
+salvar();
+
+alert(
+"Movimentação registrada:\n"+
+tipo+" - "+dinheiro(valor)
+);
+
+caixa();
+
 }
+
+
+/* =====================================================
+   OPERADORES
+===================================================== */
+
+function gerenciarOperadores(){
+
+if(
+!operadorAtual ||
+!operadorAtual.admin
+){
+
+alert(
+"Somente o Administrador pode gerenciar operadores."
+);
+
+return;
+
+}
+
+
+tela.innerHTML=`
+
+<div class="card">
+
+<h2>👤 Operadores</h2>
+
+<p class="muted">
+Somente o Administrador pode adicionar
+ou excluir operadores.
+</p>
+
+<input
+id="novoNome"
+placeholder="Nome do operador">
+
+<input
+id="novoUsuario"
+placeholder="Usuário">
+
+<input
+id="novaSenha"
+type="password"
+placeholder="Senha">
+
+<label>
+<input
+id="novoAdmin"
+type="checkbox"
+style="width:auto">
+
+ Administrador
+</label>
+
+<button
+class="green"
+onclick="adicionarOperador()">
+
+➕ Adicionar operador
+
+</button>
+
+<button
+class="gray"
+onclick="caixa()">
+
+Voltar
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Operadores cadastrados</h3>
+
+${
+operadores.map((o,i)=>`
+
+<div class="item">
+
+<span>
+
+<b>
+${esc(o.nome)}
+</b>
+
+<br>
+
+<small>
+Usuário: ${esc(o.usuario)}
+</small>
+
+<br>
+
+${
+o.admin
+?
+`<span class="badge badge-yellow">
+Administrador
+</span>`
+:
+`<span class="badge badge-green">
+Operador
+</span>`
+}
+
+</span>
+
+${
+o.usuario!=="admin"
+?
+`
+<button
+class="danger"
+onclick="removerOperador(${i})">
+
+Excluir
+
+</button>
+`
+:
+`<span class="badge badge-yellow">
+Principal
+</span>`
+}
+
+</div>
+
+`)
+.join("")
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   ADICIONAR OPERADOR
+===================================================== */
+
+function adicionarOperador(){
+
+let nome=
+document
+.getElementById("novoNome")
+.value
+.trim();
+
+let usuario=
+document
+.getElementById("novoUsuario")
+.value
+.trim();
+
+let senha=
+document
+.getElementById("novaSenha")
+.value;
+
+let admin=
+document
+.getElementById("novoAdmin")
+.checked;
+
+
+if(!nome||!usuario||!senha){
+
+alert(
+"Preencha nome, usuário e senha."
+);
+
+return;
+
+}
+
+
+if(
+operadores.some(
+o=>o.usuario===usuario
+)
+){
+
+alert(
+"Esse usuário já existe."
+);
+
+return;
+
+}
+
+
+operadores.push({
+
+nome:nome,
+usuario:usuario,
+senha:senha,
+admin:admin
+
+});
+
+
+salvar();
+
+alert(
+"✅ Operador adicionado com sucesso."
+);
+
+gerenciarOperadores();
+
+}
+
+
+/* =====================================================
+   REMOVER OPERADOR
+===================================================== */
+
+function removerOperador(i){
+
+if(
+operadores[i].usuario==="admin"
+){
+
+alert(
+"O Administrador principal não pode ser excluído."
+);
+
+return;
+
+}
+
+
+if(
+!confirm(
+"Excluir o operador "+
+operadores[i].nome+
+"?"
+)
+)return;
+
+
+operadores.splice(i,1);
+
+salvar();
+
+gerenciarOperadores();
+
+}
+
+
+/* =====================================================
+   RELATÓRIO DE VENDAS
+===================================================== */
+
+function relatorioVendas(){
+
+let lista=
+banco.vendas
+.slice()
+.reverse();
+
+
+tela.innerHTML=`
+
+<div class="card">
+
+<h2>📄 Vendas</h2>
+
+<button
+class="gray"
+onclick="caixa()">
+
+Voltar
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+${
+lista.map(v=>`
+
+<div class="item">
+
+<span>
+
+<b>
+${v.cancelada?"❌ CANCELADA":"✅ VENDA"}
+</b>
+
+<br>
+
+<small>
+${new Date(v.data)
+.toLocaleString("pt-BR")}
+</small>
+
+<br>
+
+<small>
+Operador: ${esc(v.operador)}
+</small>
+
+<br>
+
+<small>
+Pagamento: ${esc(v.pagamento)}
+</small>
+
+${
+v.cancelada
+?
+`
+<br>
+<small>
+Motivo: ${esc(v.motivoCancelamento)}
+</small>
+`
+:
+""
+}
+
+</span>
+
+<span style="text-align:right">
+
+<b>
+${dinheiro(v.total)}
+</b>
+
+${
+!v.cancelada
+?
+`
+<br>
+
+<button
+class="danger"
+onclick="cancelarVenda(${v.id})">
+
+Cancelar
+
+</button>
+`
+:
+""
+}
+
+</span>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Nenhuma venda registrada.</p>"
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   RELATÓRIO MOVIMENTAÇÕES
+===================================================== */
+
+function relatorioMovimentos(){
+
+let lista=
+banco.movimentos
+.slice()
+.reverse();
+
+
+tela.innerHTML=`
+
+<div class="card">
+
+<h2>💵 Entradas e Saídas</h2>
+
+<button
+class="gray"
+onclick="caixa()">
+
+Voltar
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+${
+lista.map(m=>`
+
+<div class="item">
+
+<span>
+
+<b>
+${m.tipo==="Entrada"?"➕ Entrada":"➖ Saída"}
+</b>
+
+<br>
+
+<small>
+${new Date(m.data)
+.toLocaleString("pt-BR")}
+</small>
+
+<br>
+
+<small>
+${esc(m.descricao)}
+</small>
+
+<br>
+
+<small>
+Operador: ${esc(m.operador)}
+</small>
+
+</span>
+
+<b>
+${dinheiro(m.valor)}
+</b>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Nenhuma movimentação.</p>"
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   HISTÓRICO DE CAIXAS
+===================================================== */
+
+function historicoCaixas(){
+
+let lista=
+(banco.fechamentos||[])
+.slice()
+.reverse();
+
+
+tela.innerHTML=`
+
+<div class="card">
+
+<h2>🗂️ Histórico de Caixas</h2>
+
+<button
+class="gray"
+onclick="caixa()">
+
+Voltar
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+${
+lista.map(f=>`
+
+<div class="item">
+
+<span>
+
+<b>
+Caixa fechado
+</b>
+
+<br>
+
+<small>
+Abertura:
+${new Date(f.abertura)
+.toLocaleString("pt-BR")}
+</small>
+
+<br>
+
+<small>
+Fechamento:
+${new Date(f.fechamento)
+.toLocaleString("pt-BR")}
+</small>
+
+<br>
+
+<small>
+Operador:
+${esc(f.operadorFechamento)}
+</small>
+
+</span>
+
+<span style="text-align:right">
+
+Esperado:
+<b>
+${dinheiro(f.esperado)}
+</b>
+
+<br>
+
+Contado:
+<b>
+${dinheiro(f.contado)}
+</b>
+
+<br>
+
+<b>
+${dinheiro(f.diferenca)}
+</b>
+
+</span>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>Nenhum fechamento registrado.</p>"
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   EXPORTAR CSV
+===================================================== */
+
+function exportar(){
+
+let texto=
+"ID;Data;Operador;Caixa;Pagamento;Total;Recebido;Troco;Cliente;Status;Motivo\n";
+
+
+banco.vendas.forEach(v=>{
+
+texto+=
+[
+v.id,
+v.data,
+v.operador,
+v.caixaId||"",
+v.pagamento,
+v.total,
+v.recebido,
+v.troco,
+v.cliente||"",
+v.cancelada?"CANCELADA":"ATIVA",
+v.motivoCancelamento||""
+]
+.map(x=>
+String(x)
+.replace(/;/g,",")
+)
+.join(";")
++"\n";
+
+});
+
+
+let blob=
+new Blob(
+["\ufeff"+texto],
+{
+type:"text/csv;charset=utf-8"
+}
+);
+
+
+let url=
+URL.createObjectURL(blob);
+
+let a=
+document.createElement("a");
+
+a.href=url;
+a.download="vendas-caixa-pro.csv";
+
+document.body.appendChild(a);
+
+a.click();
+
+a.remove();
+
+setTimeout(
+()=>URL.revokeObjectURL(url),
+1000
+);
+
+}
+
+
+/* =====================================================
+   SALVAR INICIALMENTE
+===================================================== */
+
+salvar();
+
 </script>
+
 </body>
 </html>
