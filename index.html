@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Caixa Pro">
+<title>Caixa Pro</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:80px}
+header{background:#111827;color:white;padding:25px 16px 14px;position:sticky;top:0;z-index:5}header h1{margin:0;font-size:21px}
+main{max-width:700px;margin:auto;padding:14px}.card{background:white;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px #0001}
+input,select,button{width:100%;padding:12px;border-radius:11px;border:1px solid #d1d5db;font-size:16px;background:white;margin:4px 0}
+button{background:#111827;color:white;border:0;font-weight:bold}.danger{background:#dc2626}.gray{background:#e5e7eb;color:#111827}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.valor{font-size:23px;font-weight:bold}.muted{color:#6b7280}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #ddd;padding:8px;display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
+nav button{background:white;color:#374151;font-size:11px;margin:0;padding:7px 2px}
+.item{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #eee}
+.hidden{display:none}.center{text-align:center}
+</style>
+</head>
+<body>
+
+<div id="login" style="padding:35px 18px">
+<div class="card">
+<h1 class="center">🧾 Caixa Pro</h1>
+<p class="center muted">Controle de Caixa</p>
+<input id="usuario" placeholder="Usuário">
+<input id="senha" type="password" placeholder="Senha">
+<button onclick="entrar()">Entrar</button>
+<p class="center muted">Primeiro acesso: admin / 1234</p>
+</div>
+</div>
+
+<div id="app" class="hidden">
+<header>
+<h1>🧾 Caixa Pro</h1>
+<div id="operador"></div>
+</header>
+
+<main id="tela"></main>
+
+<nav>
+<button onclick="pagina('inicio')">🏠<br>Início</button>
+<button onclick="pagina('venda')">🛒<br>Venda</button>
+<button onclick="pagina('produtos')">📦<br>Produtos</button>
+<button onclick="pagina('clientes')">👥<br>Clientes</button>
+<button onclick="pagina('caixa')">💰<br>Caixa</button>
+</nav>
+</div>
+
+<script>
+let banco=JSON.parse(localStorage.getItem("CAIXA_PRO")||"null")||{
+produtos:[],clientes:[],vendas:[],movimentos:[],caixa:null
+};
+let usuarioAtual="";
+let carrinho=[];
+
+function salvar(){
+localStorage.setItem("CAIXA_PRO",JSON.stringify(banco));
+}
+
+function dinheiro(v){
+return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(v||0);
+}
+
+function entrar(){
+if(usuario.value==="admin"&&senha.value==="1234"){
+usuarioAtual="Administrador";
+login.classList.add("hidden");
+app.classList.remove("hidden");
+operador.innerText="Operador: "+usuarioAtual;
+pagina("inicio");
+}else alert("Usuário ou senha incorretos.");
+}
+
+function pagina(p){
+if(p==="inicio")inicio();
+if(p==="venda")venda();
+if(p==="produtos")produtos();
+if(p==="clientes")clientes();
+if(p==="caixa")caixa();
+}
+
+function inicio(){
+let total=banco.vendas.filter(v=>!v.cancelada).reduce((a,v)=>a+v.total,0);
+tela.innerHTML=`
+<div class="card">
+<h2>Resumo</h2>
+<div class="grid">
+<div><span class="muted">Vendas</span><div class="valor">${dinheiro(total)}</div></div>
+<div><span class="muted">Produtos</span><div class="valor">${banco.produtos.length}</div></div>
+</div>
+</div>
+<div class="card">
+<h3>Status do caixa</h3>
+<h2>${banco.caixa?"🟢 ABERTO":"🔴 FECHADO"}</h2>
+<button onclick="pagina('venda')">Nova venda</button>
+</div>
+<div class="card">
+<h3>Últimas vendas</h3>
+${banco.vendas.slice(-5).reverse().map(v=>`
+<div class="item"><span>${v.pagamento}</span><b>${dinheiro(v.total)}</b></div>
+`).join("")||"<p class='muted'>Nenhuma venda.</p>"}
+</div>`;
+}
+
+function venda(){
+let total=carrinho.reduce((a,x)=>a+x.preco*x.qtd,0);
+tela.innerHTML=`
+<div class="card">
+<h2>🛒 Nova Venda</h2>
+<input id="busca" placeholder="Nome ou código do produto">
+<div class="grid">
+<input id="quantidade" type="number" value="1" min="1">
+<button onclick="adicionar()">Adicionar</button>
+</div>
+</div>
+<div class="card">
+<h3>Carrinho</h3>
+${carrinho.map((x,i)=>`
+<div class="item">
+<span>${x.nome} × ${x.qtd}</span>
+<b>${dinheiro(x.preco*x.qtd)}
+<button style="width:auto;padding:5px" onclick="remover(${i})">×</button>
+</b>
+</div>`).join("")||"<p class='muted'>Carrinho vazio.</p>"}
+<hr>
+<h2>TOTAL: ${dinheiro(total)}</h2>
+<select id="pagamento">
+<option>Dinheiro</option>
+<option>Pix</option>
+<option>Cartão de débito</option>
+<option>Cartão de crédito</option>
+<option>Fiado</option>
+</select>
+<input id="recebido" type="number" step="0.01" placeholder="Valor recebido (dinheiro)">
+<button onclick="finalizar()">Finalizar venda</button>
+</div>`;
+}
+
+function adicionar(){
+let texto=busca.value.trim().toLowerCase();
+let qtd=Math.max(1,parseInt(quantidade.value)||1);
+let p=banco.produtos.find(x=>x.nome.toLowerCase()===texto||x.codigo===texto);
+if(!p)return alert("Produto não encontrado.");
+if(p.estoque<qtd)return alert("Estoque insuficiente.");
+let existente=carrinho.find(x=>x.id===p.id);
+if(existente)existente.qtd+=qtd;
+else carrinho.push({id:p.id,nome:p.nome,preco:p.preco,qtd});
+venda();
+}
+
+function remover(i){
+carrinho.splice(i,1);
+venda();
+}
+
+function finalizar(){
+if(!banco.caixa)return alert("Abra o caixa antes de vender.");
+if(!carrinho.length)return alert("Carrinho vazio.");
+
+let total=carrinho.reduce((a,x)=>a+x.preco*x.qtd,0);
+let pag=pagamento.value;
+let rec=pag==="Dinheiro"?parseFloat(recebido.value||0):total;
+
+if(pag==="Dinheiro"&&rec<total)
+return alert("Valor recebido menor que o total.");
+
+if(pag==="Fiado"){
+let nome=prompt("Nome do cliente:");
+if(!nome)return;
+}
+
+carrinho.forEach(x=>{
+let p=banco.produtos.find(p=>p.id===x.id);
+p.estoque-=x.qtd;
+});
+
+let venda={
+data:new Date().toISOString(),
+operador:usuarioAtual,
+total:total,
+pagamento:pag,
+recebido:rec,
+troco:pag==="Dinheiro"?rec-total:0,
+cancelada:false
+};
+
+banco.vendas.push(venda);
+salvar();
+
+alert("Venda realizada!\nTroco: "+dinheiro(venda.troco));
+carrinho=[];
+pagina("venda");
+}
+
+function produtos(){
+tela.innerHTML=`
+<div class="card">
+<h2>📦 Produtos</h2>
+<input id="pnome" placeholder="Nome do produto">
+<input id="pcodigo" placeholder="Código de barras">
+<input id="ppreco" type="number" step="0.01" placeholder="Preço de venda">
+<input id="pestoque" type="number" placeholder="Estoque">
+<button onclick="cadastrarProduto()">Cadastrar produto</button>
+</div>
+<div class="card">
+${banco.produtos.map((p,i)=>`
+<div class="item">
+<span><b>${p.nome}</b><br>
+<small>Código: ${p.codigo||"-"} | Estoque: ${p.estoque}</small></span>
+<b>${dinheiro(p.preco)}</b>
+</div>`).join("")||"<p class='muted'>Nenhum produto cadastrado.</p>"}
+</div>`;
+}
+
+function cadastrarProduto(){
+if(!pnome.value||!ppreco.value)return alert("Informe nome e preço.");
+banco.produtos.push({
+id:Date.now(),
+nome:pnome.value,
+codigo:pcodigo.value,
+preco:parseFloat(ppreco.value),
+estoque:parseInt(pestoque.value)||0
+});
+salvar();
+produtos();
+}
+
+function clientes(){
+tela.innerHTML=`
+<div class="card">
+<h2>👥 Clientes</h2>
+<input id="cnome" placeholder="Nome">
+<input id="ctelefone" placeholder="Telefone">
+<button onclick="cadastrarCliente()">Cadastrar cliente</button>
+</div>
+<div class="card">
+${banco.clientes.map(c=>`
+<div class="item"><span>${c.nome}<br><small>${c.telefone}</small></span></div>
+`).join("")||"<p class='muted'>Nenhum cliente.</p>"}
+</div>`;
+}
+
+function cadastrarCliente(){
+if(!cnome.value)return;
+banco.clientes.push({nome:cnome.value,telefone:ctelefone.value});
+salvar();
+clientes();
+}
+
+function caixa(){
+let saldo=banco.caixa?banco.caixa.inicial:0;
+
+if(banco.caixa){
+banco.vendas.filter(v=>!v.cancelada&&v.pagamento==="Dinheiro").forEach(v=>saldo+=v.total);
+banco.movimentos.forEach(m=>saldo+=m.tipo==="Entrada"?m.valor:-m.valor);
+}
+
+tela.innerHTML=`
+<div class="card">
+<h2>💰 Caixa</h2>
+${banco.caixa?`
+<h3>🟢 Caixa aberto</h3>
+<p>Saldo esperado:</p>
+<div class="valor">${dinheiro(saldo)}</div>
+<input id="contado" type="number" step="0.01" placeholder="Dinheiro contado">
+<button class="danger" onclick="fecharCaixa(${saldo})">Fechar caixa</button>
+`:`
+<h3>🔴 Caixa fechado</h3>
+<input id="inicial" type="number" step="0.01" placeholder="Valor inicial / troco">
+<button onclick="abrirCaixa()">Abrir caixa</button>
+`}
+</div>
+
+${banco.caixa?`
+<div class="card">
+<h3>Movimentação</h3>
+<button onclick="movimento('Entrada')">➕ Entrada</button>
+<button class="gray" onclick="movimento('Saída')">➖ Saída</button>
+</div>`:""}
+
+<div class="card">
+<h3>Relatório</h3>
+<p>Total de vendas: <b>${banco.vendas.length}</b></p>
+<button onclick="exportar()">Exportar vendas</button>
+</div>`;
+}
+
+function abrirCaixa(){
+let v=parseFloat(inicial.value)||0;
+banco.caixa={inicial:v,abertura:new Date().toISOString()};
+salvar();
+caixa();
+}
+
+function fecharCaixa(saldo){
+let contado=parseFloat(document.getElementById("contado").value)||0;
+let diferenca=contado-saldo;
+banco.caixa=null;
+salvar();
+alert("Caixa fechado!\nDiferença: "+dinheiro(diferenca));
+caixa();
+}
+
+function movimento(tipo){
+let valor=parseFloat(prompt("Valor:"));
+if(!(valor>0))return;
+let descricao=prompt("Descrição:")||"";
+banco.movimentos.push({tipo,valor,descricao,data:new Date().toISOString()});
+salvar();
+caixa();
+}
+
+function exportar(){
+let texto="Data;Pagamento;Total;Recebido;Troco\n";
+banco.vendas.forEach(v=>{
+texto+=`${v.data};${v.pagamento};${v.total};${v.recebido};${v.troco}\n`;
+});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(new Blob([texto],{type:"text/csv"}));
+a.download="vendas.csv";
+a.click();
+}
+</script>
+</body>
+</html>
